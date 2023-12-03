@@ -12,8 +12,13 @@
 
 class Patient{
 public:
+//UPdate the heartbeat after the patient receivesshock or cpr
 int updateHeartRhythm();
+//let the patient receive shock
 void receiveShock();
+//let the patient receive CPR
+void receiveCPR();
+
 private:
 bool isResponsive;
 int patientID;
