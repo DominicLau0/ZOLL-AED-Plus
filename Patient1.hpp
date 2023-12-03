@@ -10,4 +10,13 @@
 
 #include <stdio.h>
 
+class Patient{
+public:
+int updateHeartRhythm();
+void receiveShock();
+private:
+bool isResponsive;
+int patientID;
+}
+
 #endif /* Patient1_hpp */
