@@ -1,18 +1,29 @@
 //
-//  AEDSimulator.hpp
+// AEDSimulator.h
 //  
 //
 //  Created by Dami on 02/12/2023.
 //
 
-#ifndef AEDSimulator_hpp
-#define AEDSimulator_hpp
+#ifndef AEDSIMULATOR_H
+#define AEDSIMULATOR_H
 
 #include <stdio.h>
 #include <string>
+#include "Power.h"
+#include "Patient.h"
+#include "CPRFeedbackSystem.h"
+#include "User.h"
+#include "SafetySystem.h"
+#include "ShockDeliverySystem.h"
+
+
 
 class AEDSimulator {
 public:
+    AEDSimulator(); // Constructor
+    ~AEDSimulator(); // Destructor
+
     /*function to turn on the AED when instructed by the user*/
     bool power(bool power_switch);
 // assign values to the variable for ShockStrength and shockCount based on the value from analyzeHearthRhythm and call the deliverShockFunction after
@@ -50,4 +61,4 @@ private:
 
 
 
-#endif /* AEDSimulator_hpp */
+#endif // AEDSIMULATOR_H
