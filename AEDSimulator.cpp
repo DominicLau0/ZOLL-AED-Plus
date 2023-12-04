@@ -25,8 +25,26 @@ bool AEDSimulator::power(bool power_switch) {
 }
 
 void AEDSimulator::prepareForShock(Patient& patient) {
-    analyzeHeartRhythm(patient);
-    advisePostShockCare();
+        //should depend on shockCount to adjust shockStrength
+
+    if(patient->shockCount == 0){
+        patient->shockStrength = 200; //Joules, anywhere between 120 and 200 Joules
+        patient->shockCount++;
+        
+        //we can change the patient's heart rhythm here to show it stabilized
+    }
+    if(patient->shockCount > 0  && patient->shockCount <=3 ){
+        patient->shockStrength == 360; //Joules, anywhere between 150 and 360 Joules for every shock after the first
+        patient->shockCount++;
+    }
+    
+    if(patient->shockCount > 3){
+            user->performCPR();
+        //should call updarte hearthrhthm from patient class
+        //call analyzeheartrhythm from aed+
+        }
+
+
 }
 
 bool AEDSimulator::performSelfTest() {
@@ -92,6 +110,8 @@ void AEDSimulator::deliverShock(Patient& patient) {
     } else {
         std::cout << "Unable to deliver shock.\n";
     }
+    //delivers shock then calls update heartryhtm then calls analyze after 
+    //after 3 shocks should stop shocking and move to cpr
 }
 
 void AEDSimulator::provideFeedback(std::string display_message) {
