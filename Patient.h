@@ -8,7 +8,7 @@
 #ifndef PATIENT_H
 #define PATIENT_H
 
-#include <QList>
+
 
 class Patient {
 public:
