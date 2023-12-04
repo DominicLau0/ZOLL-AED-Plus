@@ -10,18 +10,21 @@
 
 int Patient::updateHeartRhythm() {
     // Simulate updating heart rhythm
+    // function is called in receiveshock and randopmly updates the heartryth
     // (actual update logic)
     return 0; 
 }
 
 void Patient::receiveShock() {
     // Simulate receiving shock
+    //function is called by Aed in delivershock function and calls updateheartryhtm function
     std::cout << "Patient received shock.\n";
     // ... (additional logic as needed)
 }
 
 void Patient::receiveCPR() {
     // Simulate receiving CPR
+    // function is called by patient in perfomrcpr function and calls updateheartryhtm function
     std::cout << "Patient received CPR.\n";
     // ... (additional logic as needed)
 }
