@@ -41,17 +41,17 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient) {
     // Simulate heart rhythm analysis
     std::cout << "Analyzing heart rhythm... ";
     // ... (actual analysis logic)
+    if (patient.isShockAdvised()) {
 
     // Placeholder logic for setting shock strength and count
-    patient.setShockStrength(calculateShockStrength());
-    patient.setShockCount(calculateShockCount());
-
+        patient.setShockStrength(calculateShockStrength());
+        patient.setShockCount(calculateShockCount());
+        deliverShock(patient);
+    }
     std::cout << "Analysis complete.\n";
 
     // Automatically deliver shock if advised
-    if (patient.isShockAdvised()) {
-        deliverShock(patient);
-    }
+
 }
 
 void AEDSimulator::evaluateCPRQuality() {
