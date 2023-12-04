@@ -25,7 +25,7 @@ public:
     bool isShockAdvised() const;
 
 private:
-    QList<int> heartBeat;
+    int heartBeat;
     bool isResponsive;
     int patientID;
     int shockStrength;
