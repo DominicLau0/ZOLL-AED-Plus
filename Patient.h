@@ -7,23 +7,29 @@
 
 #ifndef PATIENT_H
 #define PATIENT_H
+
 #include <QList>
 
-#include <stdio.h>
-
-class Patient{
+class Patient {
 public:
-  //UPdate the heartbeat after the patient receivesshock or cpr
-  int updateHeartRhythm();
-  //let the patient receive shock
-  void receiveShock();
-  //let the patient receive CPR
-  void receiveCPR();
+    int updateHeartRhythm();
+    void receiveShock();
+    void receiveCPR();
+
+    int getShockStrength() const;
+    void setShockStrength(int strength);
+
+    int getShockCount() const;
+    void setShockCount(int count);
+
+    bool isShockAdvised() const;
 
 private:
-  QList<int> heartBeat;
-  bool isResponsive;
-  int patientID;
-}
+    QList<int> heartBeat;
+    bool isResponsive;
+    int patientID;
+    int shockStrength;
+    int shockCount;
+};
 
 #endif // PATIENT_H
