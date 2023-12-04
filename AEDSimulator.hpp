@@ -27,11 +27,11 @@ public:
     /*function to turn on the AED when instructed by the user*/
     bool power(bool power_switch);
 // assign values to the variable for ShockStrength and shockCount based on the value from analyzeHearthRhythm and call the deliverShockFunction after
-    void prepareForShock();
+    void prepareForShock(Patient& patient);
 //perform a series of self tests
     bool performSelfTest();
 // take the data from the patients Heart_Beat and coem up with an analysis
-    void analyzeHeartRhythm();
+    void analyzeHeartRhythm(Patient& patient);
 // Give feedback on the CPR quality
     void evaluateCPRQuality(); 
     bool checkSafety();
