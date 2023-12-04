@@ -12,6 +12,8 @@
 
 class User {
 public:
+//make new analyze heart rhytm to increase likely hood oof life
+//live feedback would be gotten fronm heartbeat feedback from new analyzeheartbeat
     void performCPR();
     void applyPads();
 private:
