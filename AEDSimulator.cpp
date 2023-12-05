@@ -24,6 +24,21 @@ bool AEDSimulator::power(bool power_switch) {
     }
 }
 
+void AEDSimulator::analyzeHeartRhythm(Patient& patient) {
+    // Simulate heart rhythm analysis
+    std::cout << "Analyzing heart rhythm... ";
+    // ... (actual analysis logic)
+    if (patient.) {
+    // Placeholder logic for setting shock strength and count
+        deliverShock(patient);
+    }
+    std::cout << "Analysis complete.\n";
+
+    // Automatically deliver shock if advised
+
+}
+
+
 void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         //should depend on shockCount to adjust shockStrength
     user.applypads();
@@ -52,22 +67,7 @@ bool AEDSimulator::performSelfTest() {
     return true;
 }
 
-void AEDSimulator::analyzeHeartRhythm(Patient& patient) {
-    // Simulate heart rhythm analysis
-    std::cout << "Analyzing heart rhythm... ";
-    // ... (actual analysis logic)
-    if (patient.isShockAdvised()) {
 
-    // Placeholder logic for setting shock strength and count
-        patient.setShockStrength(calculateShockStrength());
-        patient.setShockCount(calculateShockCount());
-        deliverShock(patient);
-    }
-    std::cout << "Analysis complete.\n";
-
-    // Automatically deliver shock if advised
-
-}
 
 void AEDSimulator::evaluateCPRQuality() {
     // Simulate CPR quality evaluation
