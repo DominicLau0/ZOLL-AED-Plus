@@ -23,15 +23,32 @@ void Patient::receiveShock() {
     //function is called by Aed in delivershock function and calls updateheartryhtm function
     if(updateHeartRhythm()){
         std::cout << "Patient received shock. and is ok now\n";   
+        return;
     }
     std::cout << "Patient received shock. and is not ok shock again\n";
     // ... (additional logic as needed)
 }
 
+//most of the logic is the same as for receiveShock, only changes are in instructions displayed on console for user
 void Patient::receiveCPR() {
     // Simulate receiving CPR
     // function is called by patient in perfomrcpr function and calls updateheartryhtm function
-    std::cout << "Patient received CPR.\n";
+
+    if(updateHeartRhythm()){
+        std::cout << "Patient received CPR.\n";
+        std::cout << "CPR successful\n";   
+        return;
+    }
+
+    if(heartBeat < 60){
+        std::cout << "Please apply more pressure to chest area!\n";
+        updateHeartRhythm();
+    }else if(heartBeat > 100){
+         std::cout << "Apply less pressure and slow down compressions!\n";
+        updateHeartRhythm();
+    }
+    
+    //std::cout << "Patient received CPR.\n";
     // ... (additional logic as needed)
 }
 
