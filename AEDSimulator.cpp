@@ -28,7 +28,7 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient) {
     // Simulate heart rhythm analysis
     std::cout << "Analyzing heart rhythm... ";
     // ... (actual analysis logic)
-    if (patient.) {
+    if (patient.getHeartBeat()<= 59 || patient.getHeartBeat() >=101) {
     // Placeholder logic for setting shock strength and count
         deliverShock(patient);
     }
@@ -53,7 +53,6 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         // After 3 shocks, call CPR and update heart rhythm
         user.performCPR();
         patient.receiveCPR();
-        patient.updateHeartRhythm();
         analyzeHeartRhythm(patient);
     }
 
