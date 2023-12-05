@@ -24,7 +24,7 @@ bool AEDSimulator::power(bool power_switch) {
     }
 }
 
-void AEDSimulator::prepareForShock(Patient& patient,User4 user) {
+void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         //should depend on shockCount to adjust shockStrength
 
     if (patient.getShockCount() == 0) {
@@ -36,7 +36,7 @@ void AEDSimulator::prepareForShock(Patient& patient,User4 user) {
         patient.setShockCount(patient.getShockCount() + 1);
     } else if (patient.getShockCount() > 3) {
         // After 3 shocks, call CPR and update heart rhythm
-        user.
+        user.performCPR();
         patient.receiveCPR();
         patient.updateHeartRhythm();
         analyzeHeartRhythm(patient);
