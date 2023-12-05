@@ -26,7 +26,7 @@ bool AEDSimulator::power(bool power_switch) {
 
 void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         //should depend on shockCount to adjust shockStrength
-
+    user.applypads();
     if (patient.getShockCount() == 0) {
         patient.setShockStrength(200); // Joules, anywhere between 120 and 200 Joules
         patient.setShockCount(1);
