@@ -24,13 +24,28 @@ bool AEDSimulator::power(bool power_switch) {
     }
 }
 
+bool AEDSimulator::performSelfTest() {
+    // Simulate self-test
+    std::cout << "Performing self-test... ";
+    // ... (actual self-test logic)
+    if(this->battery_percent <=20){
+        std::cout << "BAttery Low change/ CHarge Battery \n";
+        return false;
+    }
+
+    std::cout << "Self-test complete.\n";
+    return true;
+}
+
+
+
 void AEDSimulator::analyzeHeartRhythm(Patient& patient) {
     // Simulate heart rhythm analysis
     std::cout << "Analyzing heart rhythm... ";
     // ... (actual analysis logic)
     if (patient.getHeartBeat()<= 59 || patient.getHeartBeat() >=101) {
     // Placeholder logic for setting shock strength and count
-        deliverShock(patient);
+        prepareForShock(patient, user)
     }
     std::cout << "Analysis complete.\n";
 
@@ -58,12 +73,11 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
 
 }
 
-bool AEDSimulator::performSelfTest() {
-    // Simulate self-test
-    std::cout << "Performing self-test... ";
-    // ... (actual self-test logic)
-    std::cout << "Self-test complete.\n";
-    return true;
+void AEDSimulator::deliverShock(Patient& patient) {
+    std::cout << "Delivering shock with strength " << patient.getShockStrength() << " Joules...\n";
+    patient.receiveShock(); // Call receiveShock in the Patient class
+        // ... (additional logic as needed)
+    std::cout << "Shock delivered.\n";
 }
 
 
@@ -97,18 +111,7 @@ void AEDSimulator::monitorPostShockCare() {
     std::cout << "Monitoring complete.\n";
 }
 
-void AEDSimulator::deliverShock(Patient& patient) {
-    if (checkSafety()) {
-        std::cout << "Delivering shock with strength " << patient.getShockStrength() << " Joules...\n";
-        patient.receiveShock(); // Call receiveShock in the Patient class
-        // ... (additional logic as needed)
-        std::cout << "Shock delivered.\n";
-    } else {
-        std::cout << "Unable to deliver shock.\n";
-    }
-    //delivers shock then calls update heartryhtm then calls analyze after 
-    //after 3 shocks should stop shocking and move to cpr
-}
+
 
 void AEDSimulator::provideFeedback(std::string display_message) {
     std::cout << "Feedback: " << display_message << "\n";
