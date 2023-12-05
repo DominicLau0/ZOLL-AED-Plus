@@ -24,26 +24,23 @@ bool AEDSimulator::power(bool power_switch) {
     }
 }
 
-void AEDSimulator::prepareForShock(Patient& patient) {
+void AEDSimulator::prepareForShock(Patient& patient,User4 user) {
         //should depend on shockCount to adjust shockStrength
 
-    if(patient->shockCount == 0){
-        patient->shockStrength = 200; //Joules, anywhere between 120 and 200 Joules
-        patient->shockCount++;
-        
-        //we can change the patient's heart rhythm here to show it stabilized
+    if (patient.getShockCount() == 0) {
+        patient.setShockStrength(200); // Joules, anywhere between 120 and 200 Joules
+        patient.setShockCount(1);
+        // Update patient's heart rhythm here to show stabilization
+    } else if (patient.getShockCount() > 0 && patient.getShockCount() <= 3) {
+        patient.setShockStrength(360); // Joules, anywhere between 150 and 360 Joules for every shock after the first
+        patient.setShockCount(patient.getShockCount() + 1);
+    } else if (patient.getShockCount() > 3) {
+        // After 3 shocks, call CPR and update heart rhythm
+        user.
+        patient.receiveCPR();
+        patient.updateHeartRhythm();
+        analyzeHeartRhythm(patient);
     }
-    if(patient->shockCount > 0  && patient->shockCount <=3 ){
-        patient->shockStrength == 360; //Joules, anywhere between 150 and 360 Joules for every shock after the first
-        patient->shockCount++;
-    }
-    
-    if(patient->shockCount > 3){
-            user->performCPR();
-        //should call updarte hearthrhthm from patient class
-        //call analyzeheartrhythm from aed+
-        }
-
 
 }
 
