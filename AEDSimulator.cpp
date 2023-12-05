@@ -122,12 +122,3 @@ void AEDSimulator::warnForSafety() {
     std::cout << "Warning: Ensure safety precautions.\n";
 }
 
-int AEDSimulator::calculateShockStrength() {
-    // Placeholder for shock strength calculation
-    return 200; // Default value
-}
-
-int AEDSimulator::calculateShockCount() {
-    // Placeholder for shock count calculation
-    return 1; // Default value
-}
