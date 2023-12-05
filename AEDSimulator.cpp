@@ -60,10 +60,13 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
     if (patient.getShockCount() == 0) {
         patient.setShockStrength(200); // Joules, anywhere between 120 and 200 Joules
         patient.setShockCount(1);
+        deliverShock(patient)
+
         // Update patient's heart rhythm here to show stabilization
     } else if (patient.getShockCount() > 0 && patient.getShockCount() <= 3) {
         patient.setShockStrength(360); // Joules, anywhere between 150 and 360 Joules for every shock after the first
         patient.setShockCount(patient.getShockCount() + 1);
+        deliverShock(patient)
     } else if (patient.getShockCount() > 3) {
         // After 3 shocks, call CPR and update heart rhythm
         user.performCPR();
