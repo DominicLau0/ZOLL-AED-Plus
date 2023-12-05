@@ -12,19 +12,18 @@ bool Patient::updateHeartRhythm() {
     // Simulate updating heart rhythm
     // function is called in receiveshock and randopmly updates the heartryth
     // (actual update logic)
-    
-    return true; 
+    heartBeat = 1 + (rand() % 120);
+    if(heartBeat>=60 && heartBeat<=100){
+        return true; }
+    else {return false;}
 }
 
 void Patient::receiveShock() {
     // Simulate receiving shock
     //function is called by Aed in delivershock function and calls updateheartryhtm function
     if(updateHeartRhythm()){
-        std::cout << "Patient received shock. and is ok now\n";
-        
+        std::cout << "Patient received shock. and is ok now\n";   
     }
-    
-    
     // ... (additional logic as needed)
 }
 
