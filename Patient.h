@@ -12,7 +12,7 @@
 
 class Patient {
 public:
-    int updateHeartRhythm();
+    bool updateHeartRhythm();
     void receiveShock();
     void receiveCPR();
 
