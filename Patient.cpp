@@ -50,7 +50,10 @@ void Patient::setShockCount(int count) {
     shockCount = count;
 }
 
-bool Patient::isShockAdvised() const {
-    // Placeholder for shock advice logic
-    return true; // Default to true for testing
+int Patient::getShockCount() const {
+    return shockCount;
+}
+
+int Patient::getHeartBeat() const {
+    return heartBeat;
 }
