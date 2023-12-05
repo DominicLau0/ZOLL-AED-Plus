@@ -23,6 +23,7 @@ public:
     void setShockCount(int count);
 
     bool isShockAdvised() const;
+    int getHeartBeat() const;
 
 private:
     int heartBeat;
