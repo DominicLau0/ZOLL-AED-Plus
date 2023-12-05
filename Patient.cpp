@@ -24,6 +24,7 @@ void Patient::receiveShock() {
     if(updateHeartRhythm()){
         std::cout << "Patient received shock. and is ok now\n";   
     }
+    std::cout << "Patient received shock. and is not ok shock again\n";
     // ... (additional logic as needed)
 }
 
