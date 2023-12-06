@@ -22,7 +22,7 @@ private:
     std::string userID;
     int compressionStrength;
     int getCompressionStrength();
-    int setCompressionStrength();
+    int setCompressionStrength(int strength);
     
 };
 
