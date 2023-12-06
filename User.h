@@ -20,6 +20,7 @@ public:
     void applyPads();
 private:
     std::string userID;
+    int compressionStrength;
 };
 
 #endif // USER_H
