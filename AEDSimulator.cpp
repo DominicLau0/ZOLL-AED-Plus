@@ -4,8 +4,8 @@
 //
 //  Created by Dami on 02/12/2023.
 //
-#include "AEDSimulator.h"
-#include <iostream>
+#include "AEDSimulator.hpp"
+
 
 AEDSimulator::AEDSimulator() : battery_percent(100), power_switch(false) {}
 
