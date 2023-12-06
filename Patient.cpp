@@ -30,23 +30,25 @@ void Patient::receiveShock() {
 }
 
 //most of the logic is the same as for receiveShock, only changes are in instructions displayed on console for user
-void Patient::receiveCPR() {
-    // Simulate receiving CPR
-    // function is called by patient in perfomrcpr function and calls updateheartryhtm function
+int Patient::generateCPRInstructions() const {
+    if (heartBeat < 60) {
+        std::cout << "Please apply more pressure to the chest area!\n";
+        return 1 + (rand() % 5);
+    } else if (heartBeat > 100) {
+        std::cout << "Apply less pressure and slow down compressions!\n";
+        return -1 + (rand() % -5);
+    }
+}
 
-    if(updateHeartRhythm()){
+void Patient::receiveCPR() {
+    if (updateHeartRhythm()) {
         std::cout << "Patient received CPR.\n";
-        std::cout << "CPR successful\n";   
+        std::cout << "CPR successful\n";
         return;
     }
-
-    if(heartBeat < 60){
-        std::cout << "Please apply more pressure to chest area!\n";
-        updateHeartRhythm();
-    }else if(heartBeat > 100){
-         std::cout << "Apply less pressure and slow down compressions!\n";
-        updateHeartRhythm();
-    }
+    generateCPRInstructions();
+    updateHeartRhythm();
+}
     
     //std::cout << "Patient received CPR.\n";
     // ... (additional logic as needed)
