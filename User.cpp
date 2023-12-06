@@ -6,3 +6,9 @@
 //
 
 #include "User.hpp"
+
+
+void User::performCPR(Patient& patient){
+  patient.receiveCPR();
+}
+
