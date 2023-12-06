@@ -121,8 +121,18 @@ void AEDSimulator::advisePostShockCare() {
 
 
 
-void AEDSimulator::provideFeedback(std::string display_message) {
-    std::cout << "Feedback: " << display_message << "\n";
+void AEDSimulator::provideFeedback(Patient& patient) {
+    if (patient.getHeartBeat()>= 60 && patient.getHeartBeat() <=100){
+         std::cout << "Patient is ok and should make a full recovery ";
+    }
+    if (patient.getHeartBeat()<= 60 || patient.getHeartBeat() >=100){
+         std::cout << "Patient is Still in need of medical attention and should be taken to a hospital ";
+    }
+    if (patient.getHeartBeat()== 0 ){
+         std::cout << "Patient is Dead ";
+    }
+
+    
 }
 
 void AEDSimulator::warnForSafety() {
