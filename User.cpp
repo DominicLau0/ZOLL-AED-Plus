@@ -12,3 +12,6 @@ void User::performCPR(Patient& patient){
   patient.receiveCPR();
 }
 
+void User::applyPads(){
+  std::cout << "PAds applied \n";
+}
