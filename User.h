@@ -17,7 +17,7 @@ public:
     void performCPR();
     void applyPads();
 private:
-    string userID;
+    std::string userID;
 };
 
 #endif // USER_H
