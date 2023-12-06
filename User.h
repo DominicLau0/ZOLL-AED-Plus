@@ -21,6 +21,9 @@ public:
 private:
     std::string userID;
     int compressionStrength;
+    int getCompressionStrength();
+    int setCompressionStrength();
+    
 };
 
 #endif // USER_H
