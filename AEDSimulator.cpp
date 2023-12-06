@@ -71,7 +71,6 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
     } else if (patient.getShockCount() > 3) {
         // After 3 shocks, call CPR and update heart rhythm
         user.performCPR();
-        patient.receiveCPR();
         analyzeHeartRhythm(patient);
     }
 
