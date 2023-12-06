@@ -38,7 +38,9 @@ int Patient::generateCPRInstructions() const {
     } else if (heartBeat > 100) {
         std::cout << "Apply less pressure and slow down compressions!\n";
         return -1 - (rand() % 5); //would change this to return a radnnom it betweenn -1 and -5
-    }
+    } 
+    std::cout << "Patient is fine now\n";
+    return 0;
 }
 
 void Patient::receiveCPR() {
