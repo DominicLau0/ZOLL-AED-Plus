@@ -24,6 +24,7 @@ public:
 
     bool isShockAdvised() const;
     int getHeartBeat() const;
+    int generateCPRInstructions() const;
 
 private:
     int heartBeat;
