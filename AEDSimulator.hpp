@@ -10,13 +10,9 @@
 
 #include <stdio.h>
 #include <string>
-#include "Power.h"
+#include <iostream>
 #include "Patient.h"
-#include "CPRFeedbackSystem.h"
 #include "User.h"
-#include "SafetySystem.h"
-#include "ShockDeliverySystem.h"
-
 
 
 class AEDSimulator {
