@@ -9,6 +9,7 @@
 
 
 void User::performCPR(Patient& patient){
+  std::cout << "User apply a force level of " << this->compressionStrength()<< " " ;
   patient.receiveCPR();
 }
 
