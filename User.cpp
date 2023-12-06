@@ -5,7 +5,7 @@
 //  Created by Dami on 02/12/2023.
 //
 
-#include "User.hpp"
+#include "User.h"
 
 
 void User::performCPR(Patient& patient){
