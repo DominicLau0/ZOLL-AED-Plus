@@ -100,7 +100,16 @@ bool AEDSimulator::checkSafety() {
     std::cout << "Safety check complete.\n";
     return true; // Placeholder for safety check success
 }
-
+void AEDSimulator::monitorPostShockCare() {
+    // Simulate monitoring post-shock care
+    std::cout << "Check if they are responsive ";
+    std::cout << "Ask the user how they feel ";
+    std::cout << "Ensure to speak loudly";
+    
+    
+    // ... (actual monitoring logic)
+    std::cout << "Monitoring complete.\n";
+}
 void AEDSimulator::advisePostShockCare() {
     // Simulate advice for post-shock care
     std::cout << "Advising post-shock care... ";
@@ -108,12 +117,7 @@ void AEDSimulator::advisePostShockCare() {
     std::cout << "Advice complete.\n";
 }
 
-void AEDSimulator::monitorPostShockCare() {
-    // Simulate monitoring post-shock care
-    std::cout << "Monitoring post-shock care... ";
-    // ... (actual monitoring logic)
-    std::cout << "Monitoring complete.\n";
-}
+
 
 
 
