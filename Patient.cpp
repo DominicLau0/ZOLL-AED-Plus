@@ -30,6 +30,7 @@ void Patient::receiveShock() {
 }
 
 //most of the logic is the same as for receiveShock, only changes are in instructions displayed on console for user
+// also the int retured by this function would be used by the user to chaange the compressio strength
 int Patient::generateCPRInstructions() const {
     if (heartBeat < 60) {
         std::cout << "Please apply more pressure to the chest area!\n";
