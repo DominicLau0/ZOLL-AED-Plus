@@ -40,8 +40,8 @@ public:
 //chekc the condiytion of the patient after receiving shock
     void monitorPostShockCare();
   //  bool pressShockButton(bool shock_Button);
-    void deliverShock(bool shock_Button, int ShockStrength, int shockCount); // Corrected parameter spelling
-    void provideFeedback(std::string display_message); // Corrected type
+    void deliverShock(Patient& patient); // Corrected parameter spelling
+    void provideFeedback(); // Corrected type
     void warnForSafety();
 
 private:
