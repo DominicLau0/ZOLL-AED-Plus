@@ -33,7 +33,7 @@ void Patient::receiveShock() {
 // also the int retured by this function would be used by the user to chaange the compressio strength
 
 
-void Patient::receiveCPR() {
+bool Patient::receiveCPR() {
     if (updateHeartRhythm()) {
         std::cout << "Patient received CPR.\n";
         std::cout << "CPR successful\n";
