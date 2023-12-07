@@ -21,13 +21,13 @@ int main() {
 
     // Test User's functions
     testUser.performCPR(testPatient);
-    assert(/* Add a condition based on your User.cpp logic */, "performCPR test");
+    //assert(/* Add a condition based on your User.cpp logic */, "performCPR test");
     testUser.applyPads();
-    assert(/* Add a condition based on your User.cpp logic */, "applyPads test");
+    //assert(/* Add a condition based on your User.cpp logic */, "applyPads test");
 
     // Test AEDSimulator's function
     testAEDSimulator.analyzeHeartRhythm(testPatient,testUser);
-    assert(/* Add a condition based on your AEDSimulator.cpp logic */, "analyzeHeartRhythm test");
+    //assert(/* Add a condition based on your AEDSimulator.cpp logic */, "analyzeHeartRhythm test");
 
     // Add more test cases as needed
 
