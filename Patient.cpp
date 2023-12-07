@@ -37,8 +37,9 @@ bool Patient::receiveCPR() {
     if (updateHeartRhythm()) {
         std::cout << "Patient received CPR.\n";
         std::cout << "CPR successful\n";
-        return;
+        return true;
     }
+    return false;
 }
 
 int Patient::getShockStrength() const {
