@@ -73,9 +73,6 @@ void Patient::setShockCount(int count) {
     shockCount = count;
 }
 
-int Patient::getShockCount() const {
-    return shockCount;
-}
 
 int Patient::getHeartBeat() const {
     return heartBeat;
