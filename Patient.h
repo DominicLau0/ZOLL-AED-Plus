@@ -8,7 +8,7 @@
 #ifndef PATIENT_H
 #define PATIENT_H
 
-
+#include User.h
 
 class Patient {
 public:
