@@ -12,6 +12,7 @@
 #include <iostream>
 #include "Patient.h"
 
+class Patient;
 class User {
 public:
 //make new analyze heart rhytm to increase likely hood oof life
