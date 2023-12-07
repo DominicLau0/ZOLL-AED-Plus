@@ -21,5 +21,5 @@ int User::getCompressionStrength(){
 }
 
 int User::setCompressionStrength(int strength){
-      strength = compressionStrength;
+  compressionStrength+= strength;
 }
