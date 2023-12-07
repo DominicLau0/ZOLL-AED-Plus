@@ -8,8 +8,8 @@
 #ifndef PATIENT_H
 #define PATIENT_H
 
-//#include "User.h"
-class User;
+#include "User.h"
+
 class Patient {
 public:
     bool updateHeartRhythm();
