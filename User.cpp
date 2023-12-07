@@ -7,7 +7,7 @@
 
 #include "User.h"
 
-void Patient::generateCPRInstructions(Patient& patient) const {
+void User::generateCPRInstructions(Patient& patient) const {
     if (patient.getHeartBeat() < 60) {
         std::cout << "Please apply more pressure to the chest area!\n";
         *this.setCompressionStrength( 1 + (rand() % 5));
