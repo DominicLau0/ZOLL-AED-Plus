@@ -49,7 +49,7 @@ void Patient::receiveCPR() {
         std::cout << "CPR successful\n";
         return;
     }
-    generateCPRInstructions();
+    generateCPRInstructions(*this);
     updateHeartRhythm();
 }
 
