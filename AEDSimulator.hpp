@@ -37,7 +37,7 @@ public:
     void monitorPostShockCare();
   //  bool pressShockButton(bool shock_Button);
     void deliverShock(Patient& patient); // Corrected parameter spelling
-    void provideFeedback(); // Corrected type
+    void provideFeedback(Patient& patient); // Corrected type
     void warnForSafety();
 
 private:
