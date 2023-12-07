@@ -6,7 +6,7 @@
 //
 
 #include "Patient.h"
-#include <iostream>
+
 
 bool Patient::updateHeartRhythm() {
     // Simulate updating heart rhythm
