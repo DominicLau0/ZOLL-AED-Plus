@@ -16,3 +16,10 @@ void User::performCPR(Patient& patient){
 void User::applyPads(){
   std::cout << "PAds applied \n";
 }
+int User::getCompressionStrength(){
+  return compressionStrength;
+}
+
+int User::setCompressionStrength(int strength){
+      strength = compressionStrength;
+}
