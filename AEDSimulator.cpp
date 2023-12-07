@@ -39,13 +39,13 @@ bool AEDSimulator::performSelfTest() {
 
 
 
-void AEDSimulator::analyzeHeartRhythm(Patient& patient) {
+void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
     // Simulate heart rhythm analysis
     std::cout << "Analyzing heart rhythm... ";
     // ... (actual analysis logic)
     for(int i =0;i<=2;i++){
         if (patient.getHeartBeat()<= 59 || patient.getHeartBeat() >=101) {
-        prepareForShock(patient, user)
+        prepareForShock(patient, user);
     }else{
             std::cout << "Analysis complete.\n";
         break;}
@@ -70,7 +70,7 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         deliverShock(patient);
     } else if (patient.getShockCount() > 3) {
         // After 3 shocks, call CPR and update heart rhythm
-        user.performCPR();
+        user.performCPR(patient);
         analyzeHeartRhythm(patient);
     }
 
