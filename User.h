@@ -23,6 +23,7 @@ public:
     void applyPads();
     int getCompressionStrength();
     int setCompressionStrength(int strength);
+    void generateCPRInstructions(User& user) const;
 private:
     std::string userID;
     int compressionStrength;
