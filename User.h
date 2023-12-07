@@ -8,6 +8,7 @@
 #ifndef USER_H
 #define USER_H
 
+class Patient;
 #include <string>
 #include <stdio.h>
 #include <iostream>
