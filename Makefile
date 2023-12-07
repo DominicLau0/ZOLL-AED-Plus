@@ -1,37 +1,20 @@
-objects = main.o TestView.o TestControl.o Editor.o VideoRepo.o VideoArray.o Video.o SceneArray.o Scene.o Date.o
+objects = test_simulation.o Patient.o User.o AEDSimulator.o
 
 a2: $(objects)
 	g++ -o a2 $(objects) 
 
-main.o: main.cc
-	g++ -c main.cc 
+test_simulation.o: test_simulation.cc
+	g++ -c test_simulation.cc 
 
-TestView.o: TestView.h TestView.cc 
-	g++ -c TestView.cc
+AEDSimulator.o: AEDSimulator.h AEDSimulator.cc 
+	g++ -c AEDSimulator.cc
 
-TestControl.o: TestControl.h TestControl.cc 
-	g++ -c TestControl.cc
+Patient.o: Patient.h Patient.cc 
+	g++ -c Patient.cc
 
-Editor.o: Editor.h Editor.cc 
-	g++ -c Editor.cc
+User.o: User.h User.cc 
+	g++ -c User.cc
 
-VideoRepo.o: VideoRepo.h VideoRepo.cc
-	g++ -c VideoRepo.cc
-
-VideoArray.o: VideoArray.h VideoArray.cc
-	g++ -c VideoArray.cc
-
-Video.o: Video.cc Video.h
-	g++ -c Video.cc
-
-SceneArray.o: SceneArray.cc SceneArray.h
-	g++ -c SceneArray.cc
-	
-Scene.o: Scene.cc Scene.h 
-	g++ -c Scene.cc
-
-Date.o: Date.cc Date.h 
-	g++ -c Date.cc
 
 clean:
 	rm -f a2 *.o	
