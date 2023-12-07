@@ -18,7 +18,7 @@ class Patient {
 public:
     bool updateHeartRhythm();
     void receiveShock();
-    void receiveCPR();
+    bool receiveCPR();
 
     int getShockStrength() const;
     void setShockStrength(int strength);
