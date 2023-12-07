@@ -6,9 +6,7 @@
 //
 #include "AEDSimulator.hpp"
 
-
 AEDSimulator::AEDSimulator() : battery_percent(100), power_switch(false) {}
-
 AEDSimulator::~AEDSimulator() {}
 
 bool AEDSimulator::power(bool power_switch) {
@@ -37,8 +35,6 @@ bool AEDSimulator::performSelfTest() {
     return true;
 }
 
-
-
 void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
     // Simulate heart rhythm analysis
     std::cout << "Analyzing heart rhythm... ";
@@ -51,7 +47,6 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
         break;}
     }
     // Automatically deliver shock if advised
-
 }
 
 
@@ -71,7 +66,7 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
     } else if (patient.getShockCount() > 3) {
         // After 3 shocks, call CPR and update heart rhythm
         user.performCPR(patient);
-        analyzeHeartRhythm(patient);
+        analyzeHeartRhythm(patient,user);
     }
 
 }
@@ -82,8 +77,6 @@ void AEDSimulator::deliverShock(Patient& patient) {
         // ... (additional logic as needed)
     std::cout << "Shock delivered.\n";
 }
-
-
 
 void AEDSimulator::evaluateCPRQuality() {
     // Simulate CPR quality evaluation
@@ -109,16 +102,13 @@ void AEDSimulator::monitorPostShockCare() {
     // ... (actual monitoring logic)
     std::cout << "Monitoring complete.\n";
 }
+
 void AEDSimulator::advisePostShockCare() {
     // Simulate advice for post-shock care
     std::cout << "Advising post-shock care... ";
     // ... (actual advice logic)
     std::cout << "Advice complete.\n";
 }
-
-
-
-
 
 void AEDSimulator::provideFeedback(Patient& patient) {
     if (patient.getHeartBeat()>= 60 && patient.getHeartBeat() <=100){
@@ -130,8 +120,6 @@ void AEDSimulator::provideFeedback(Patient& patient) {
     if (patient.getHeartBeat()== 0 ){
          std::cout << "Patient is Dead ";
     }
-
-    
 }
 
 void AEDSimulator::warnForSafety() {
