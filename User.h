@@ -18,11 +18,12 @@ public:
 //live feedback would be gotten fronm heartbeat feedback from new analyzeheartbeat
     void performCPR(Patient& patient);
     void applyPads();
+    int getCompressionStrength();
+    int setCompressionStrength(int strength);
 private:
     std::string userID;
     int compressionStrength;
-    int getCompressionStrength();
-    int setCompressionStrength(int strength);
+    
     
 };
 
