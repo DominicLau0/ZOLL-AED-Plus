@@ -27,7 +27,7 @@ public:
 //perform a series of self tests
     bool performSelfTest();
 // take the data from the patients Heart_Beat and coem up with an analysis
-    void analyzeHeartRhythm(Patient& patient);
+    void analyzeHeartRhythm(Patient& patient, User& user);
 // Give feedback on the CPR quality
     void evaluateCPRQuality(); 
     bool checkSafety();
