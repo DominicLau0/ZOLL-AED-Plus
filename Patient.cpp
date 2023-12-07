@@ -31,16 +31,16 @@ void Patient::receiveShock() {
 
 //most of the logic is the same as for receiveShock, only changes are in instructions displayed on console for user
 // also the int retured by this function would be used by the user to chaange the compressio strength
-int Patient::generateCPRInstructions() const {
+int Patient::generateCPRInstructions(User& user) const {
     if (heartBeat < 60) {
         std::cout << "Please apply more pressure to the chest area!\n";
-        return 1 + (rand() % 5);
+        user.setCompressionStrength( 1 + (rand() % 5));
     } else if (heartBeat > 100) {
         std::cout << "Apply less pressure and slow down compressions!\n";
-        return -1 - (rand() % 5); //would change this to return a radnnom it betweenn -1 and -5
+        user.setCompressionStrength( -1 - (rand() % 5)); //would change this to return a radnnom it betweenn -1 and -5
     } 
     std::cout << "Patient is fine now\n";
-    return 0;
+    user.setCompressionStrength(0);
 }
 
 void Patient::receiveCPR() {
