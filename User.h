@@ -22,8 +22,8 @@ public:
     void performCPR(Patient& patient);
     void applyPads();
     int getCompressionStrength();
-    int setCompressionStrength(int strength);
-    void generateCPRInstructions(Patient& patient) const;
+    void setCompressionStrength(int strength);
+    void generateCPRInstructions(Patient& patient) ;
 private:
     std::string userID;
     int compressionStrength;
