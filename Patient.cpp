@@ -39,8 +39,6 @@ void Patient::receiveCPR() {
         std::cout << "CPR successful\n";
         return;
     }
-    generateCPRInstructions(*this);
-    updateHeartRhythm();
 }
 
 int Patient::getShockStrength() const {
