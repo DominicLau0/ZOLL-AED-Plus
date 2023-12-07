@@ -26,7 +26,7 @@ int main() {
     assert(/* Add a condition based on your User.cpp logic */, "applyPads test");
 
     // Test AEDSimulator's function
-    testAEDSimulator.analyzeHeartRhythm(testPatient);
+    testAEDSimulator.analyzeHeartRhythm(testPatient,testUser);
     assert(/* Add a condition based on your AEDSimulator.cpp logic */, "analyzeHeartRhythm test");
 
     // Add more test cases as needed
