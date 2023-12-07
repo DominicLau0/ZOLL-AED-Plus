@@ -1,7 +1,8 @@
 // test_simulation.cpp
 #include <iostream>
 #include "User.h"
-#include "AEDSimulator.h"
+#include "AEDSimulator.hpp"
+#include "Patient.h"
 
 // Simple assert function for testing
 void assert(bool condition, const char* message) {
