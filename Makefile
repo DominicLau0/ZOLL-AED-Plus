@@ -4,17 +4,17 @@ CXXFLAGS = -std=c++11 -Wall -Wextra -Wunused-variable
 a2: $(objects)
 	g++ -o a2 $(objects) 
 
-test_simulation.o: test_simulation.cc
-	g++ -c $(CXXFLAGS) test_simulation.cc 
+test_simulation.o: test_simulation.cpp
+	g++ -c $(CXXFLAGS) test_simulation.cpp
 
-AEDSimulator.o: AEDSimulator.h AEDSimulator.cc 
-	g++ -c $(CXXFLAGS) AEDSimulator.cc
+AEDSimulator.o: AEDSimulator.hpp AEDSimulator.cpp
+	g++ -c $(CXXFLAGS) AEDSimulator.cpp
 
-Patient.o: Patient.h Patient.cc 
-	g++ -c $(CXXFLAGS) Patient.cc
+Patient.o: Patient.h Patient.cpp
+	g++ -c $(CXXFLAGS) Patient.cpp
 
-User.o: User.h User.cc 
-	g++ -c $(CXXFLAGS) User.cc
+User.o: User.h User.cpp
+	g++ -c $(CXXFLAGS) User.cpp
 
 clean:
 	rm -f a2 *.o
