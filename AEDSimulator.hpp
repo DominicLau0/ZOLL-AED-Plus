@@ -45,14 +45,6 @@ private:
     std::string display_message;
     std::string audio;
     bool power_switch;
-    float compression_rate;
-    float compression_depth;
-    bool isShockAvailable;
-    bool isClearedForShock; // Corrected spelling
-    int ShockStrength;
-    int shockCount;
-    int timer;
-    bool shock_Button; // Corrected missing semicolon
 };
 
 
