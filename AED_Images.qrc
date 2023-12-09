@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/AED_Image.jpg</file>
+        <file>Images/LED_Indicator.png</file>
+        <file>Images/Power_Button.png</file>
+        <file>Images/self_test_off.png</file>
+        <file>Images/self_test_on.png</file>
+        <file>Images/Shock_Button.png</file>
+    </qresource>
+</RCC>
