@@ -7,26 +7,38 @@
 
 #include "Patient.h"
 
+Patient::Patient():heartBeat( 1 + (rand() % 105)),shockCount(0){
+    
+}
 
 bool Patient::updateHeartRhythm() {
     // Simulate updating heart rhythm
     // function is called in receiveshock and randopmly updates the heartryth
     // (actual update logic)
-    heartBeat = 1 + (rand() % 120);
-    if(heartBeat>=60 && heartBeat<=100){
-        return true; }
-    else {return false;}
+    heartBeat = 1 + (rand() % 105);
+    return (heartBeat >= 60 && heartBeat <= 100);
+}
+
+bool Patient::updateHeartBeat() {
+    // Simulate updating heart rhythm
+    // function is called in receiveshock and randopmly updates the heartryth
+    // (actual update logic)
+    heartBeat = 1 + (rand() % 200);
+    return (heartBeat >= 60 && heartBeat <= 100);
 }
 
 void Patient::receiveShock() {
     // Simulate receiving shock
     //function is called by Aed in delivershock function and calls updateheartryhtm function
-    if(updateHeartRhythm()){
-        std::cout << "Patient received shock. and is ok now\n";   
+    updateHeartBeat();
+    if(updateHeartBeat()){
+        std::cout << "Patient received shock. and is ok now\n";
+        std::cout << "Heart Beat is now: " << getHeartBeat() << "\n";
         return;
     }
     std::cout << "Patient received shock. and is not ok shock again\n";
-    // ... (additional logic as needed)
+    std::cout << "Heart Beat is now:  " << getHeartBeat() << "\n";
+
 }
 
 //most of the logic is the same as for receiveShock, only changes are in instructions displayed on console for user
@@ -35,10 +47,12 @@ void Patient::receiveShock() {
 
 bool Patient::receiveCPR() {
     if (updateHeartRhythm()) {
-        std::cout << "Patient received CPR.\n";
-        std::cout << "CPR successful\n";
+        std::cout << "Patient received CPR. and is ok now\n";
+        std::cout << "Heart Beat is now: " << getHeartBeat() << "\n";
         return true;
     }
+    std::cout << "Patient received CPR. and is not ok CPR again\n";
+    std::cout << "Heart Beat is now:  " << getHeartBeat() << "\n";
     return false;
 }
 

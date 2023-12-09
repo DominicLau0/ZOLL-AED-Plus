@@ -12,6 +12,7 @@ class Patient;
 #include <string>
 #include <stdio.h>
 #include <iostream>
+#include <random>
 #include "Patient.h"
 
 
@@ -19,6 +20,7 @@ class User {
 public:
 //make new analyze heart rhytm to increase likely hood oof life
 //live feedback would be gotten fronm heartbeat feedback from new analyzeheartbeat
+    User();
     void performCPR(Patient& patient);
     void applyPads();
     int getCompressionStrength();

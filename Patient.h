@@ -11,12 +11,15 @@ class Patient;
 #include <string>
 #include <stdio.h>
 #include <iostream>
+#include <random>
 
 #include "User.h"
 
 class Patient {
 public:
+    Patient();
     bool updateHeartRhythm();
+    bool updateHeartBeat();
     void receiveShock();
     bool receiveCPR();
 
@@ -26,14 +29,11 @@ public:
     int getShockCount() const;
     void setShockCount(int count);
 
-    bool isShockAdvised() const;
     int getHeartBeat() const;
     
 
 private:
     int heartBeat;
-    bool isResponsive;
-    int patientID;
     int shockStrength;
     int shockCount;
 };

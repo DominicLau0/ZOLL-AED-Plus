@@ -31,18 +31,20 @@ bool AEDSimulator::performSelfTest() {
         return false;
     }
 
-    std::cout << "Self-test complete.\n";
+    std::cout << "Self-test complete.\n\n";
     return true;
 }
 
 void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
     // Simulate heart rhythm analysis
-    std::cout << "Analyzing heart rhythm... ";
+    std::cout << "Analyzing heart rhythm... \n";
     // ... (actual analysis logic)
-    for(int i =0;i<=2;i++){
+    for(int i =0;i<=7;i++){
         if (patient.getHeartBeat()<= 59 || patient.getHeartBeat() >=101) {
+            user.applyPads();
         prepareForShock(patient, user);
     }else{
+        std::cout << "Patinets hearbeat is fine Prescricbe rest\n";
             std::cout << "Analysis complete.\n";
         break;}
     }
@@ -52,9 +54,8 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
 
 void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         //should depend on shockCount to adjust shockStrength
-    user.applyPads();
     if (patient.getShockCount() == 0) {
-        patient.setShockStrength(200); // Joules, anywhere between 120 and 200 Joules
+        patient.setShockStrength(200);
         patient.setShockCount(1);
         deliverShock(patient);
 
@@ -65,6 +66,7 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         deliverShock(patient);
     } else if (patient.getShockCount() > 3) {
         // After 3 shocks, call CPR and update heart rhythm
+        std::cout << "Patient is Dying perform CPR " ;
         user.performCPR(patient);
         analyzeHeartRhythm(patient,user);
     }
@@ -73,9 +75,10 @@ void AEDSimulator::prepareForShock(Patient& patient,User& user) {
 
 void AEDSimulator::deliverShock(Patient& patient) {
     std::cout << "Delivering shock with strength " << patient.getShockStrength() << " Joules...\n";
+    std::cout << "Shock delivered.\n";
     patient.receiveShock(); // Call receiveShock in the Patient class
         // ... (additional logic as needed)
-    std::cout << "Shock delivered.\n";
+    
 }
 
 void AEDSimulator::evaluateCPRQuality() {
