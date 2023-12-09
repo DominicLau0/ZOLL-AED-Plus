@@ -62,6 +62,12 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
     }
 }
 
+    int getBatteryPercent() const{ rerurn battery_percent}
+    void setBatteryPercent(int Percent){
+        battery_percent = Percent;
+    }
+
+
 
 void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         //should depend on shockCount to adjust shockStrength
