@@ -1,1 +1,0 @@
-# Compile the source files into object filesg++ -c User.cpp Patient.cpp test_simulation.cpp AEDSimulator.cpp# Link the object files to create the executableg++ -o test_simulation User.o AEDSimulator.o Patient.o test_simulation.o
