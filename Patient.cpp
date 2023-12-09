@@ -7,7 +7,7 @@
 
 #include "Patient.h"
 
-Patient::Patient():heartBeat( 1 + (rand() % 105)),shockCount(0),cprCount(0){
+Patient::Patient():heartBeat( 1 + (rand() % 120)),shockCount(0),cprCount(0){
 
 }
 
