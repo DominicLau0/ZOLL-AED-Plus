@@ -8,7 +8,7 @@
 #include <iostream>
 #include <QtDebug>
 
-AEDSimulator::AEDSimulator() : battery_percent(100), power_switch(false) {
+AEDSimulator::AEDSimulator() : battery_percent(1 + (rand() % 105)), power_switch(false) {
 }
 
 AEDSimulator::~AEDSimulator() {}
