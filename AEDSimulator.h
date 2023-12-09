@@ -30,6 +30,11 @@ public:
     void deliverShock(Patient& patient);
     void provideFeedback(Patient& patient);
 
+    int getBatteryPercent() const;
+    void setBatteryPercent(int Percent);
+
+
+
 private:
     float battery_percent;
     std::string display_message;
