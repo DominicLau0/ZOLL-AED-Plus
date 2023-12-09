@@ -39,16 +39,25 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
     // Simulate heart rhythm analysis
     std::cout << "Analyzing heart rhythm... \n";
     // ... (actual analysis logic)
-    for(int i =0;i<=7;i++){
+    for(int i =0;i<=5;i++){
         if (patient.getHeartBeat()<= 59 || patient.getHeartBeat() >=101) {
             user.applyPads();
-        prepareForShock(patient, user);
-    }else{
-        std::cout << "Patinets hearbeat is fine Prescricbe rest\n";
-            std::cout << "Analysis complete.\n";
-        break;}
+            prepareForShock(patient, user);
+        }
+        else
+            if(patient.getShockCount()>=1 &&patient.getCPRCount()>=1) {
+                provideFeedback(patient);
+                evaluateCPRQuality(patient);
+                break;
+                return;
+            }
+            else if(patient.getShockCount()>=1 &&patient.getCPRCount()<=0){
+                provideFeedback(patient);
+                monitorPostShockCare();
+                break;
+            }
+        // Automatically deliver shock if advised
     }
-    // Automatically deliver shock if advised
 }
 
 
@@ -81,51 +90,40 @@ void AEDSimulator::deliverShock(Patient& patient) {
     
 }
 
-void AEDSimulator::evaluateCPRQuality() {
+void AEDSimulator::evaluateCPRQuality(Patient& patient) {
     // Simulate CPR quality evaluation
-    std::cout << "Evaluating CPR quality... ";
-    // ... (actual evaluation logic)
+    std::cout << "Evaluating CPR quality... \n";
+    if (patient.getHeartBeat()>= 60 && patient.getHeartBeat() <=100){
+         std::cout << "Patient is ok CPR worked they should make a full recovery\n";
+    }
     std::cout << "Evaluation complete.\n";
 }
 
-bool AEDSimulator::checkSafety() {
-    // Simulate safety check
-    std::cout << "Checking safety... ";
-    // ... (actual safety check logic)
-    std::cout << "Safety check complete.\n";
-    return true; // Placeholder for safety check success
-}
+
 void AEDSimulator::monitorPostShockCare() {
     // Simulate monitoring post-shock care
-    std::cout << "Check if they are responsive ";
-    std::cout << "Ask the user how they feel ";
-    std::cout << "Ensure to speak loudly";
+    std::cout << "Post shock care \n";
+    std::cout << "Check if they are responsive\n ";
+    std::cout << "Ask the user how they feel \n";
+    std::cout << "Ensure to speak loudly \n";
     
     
     // ... (actual monitoring logic)
     std::cout << "Monitoring complete.\n";
 }
 
-void AEDSimulator::advisePostShockCare() {
-    // Simulate advice for post-shock care
-    std::cout << "Advising post-shock care... ";
-    // ... (actual advice logic)
-    std::cout << "Advice complete.\n";
-}
 
 void AEDSimulator::provideFeedback(Patient& patient) {
     if (patient.getHeartBeat()>= 60 && patient.getHeartBeat() <=100){
-         std::cout << "Patient is ok and should make a full recovery ";
+         std::cout << "Patient is ok and should make a full recovery\n ";
     }
-    if (patient.getHeartBeat()<= 60 || patient.getHeartBeat() >=100){
-         std::cout << "Patient is Still in need of medical attention and should be taken to a hospital ";
+    if (patient.getHeartBeat()<= 50 || patient.getHeartBeat() >= 101){
+         std::cout << "Patient is Still in need of medical attention and should be taken to a hospital\n ";
     }
     if (patient.getHeartBeat()== 0 ){
          std::cout << "Patient is Dead ";
     }
 }
 
-void AEDSimulator::warnForSafety() {
-    std::cout << "Warning: Ensure safety precautions.\n";
-}
+
 

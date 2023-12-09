@@ -39,6 +39,7 @@ void User::performCPR(Patient& patient){
             generateCPRInstructions(patient);
             patient.updateHeartRhythm();
         }else{
+            return;
             break;
         }
     }

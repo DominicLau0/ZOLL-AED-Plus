@@ -7,7 +7,7 @@
 
 #include "Patient.h"
 
-Patient::Patient():heartBeat( 1 + (rand() % 105)),shockCount(0){
+Patient::Patient():heartBeat( 1 + (rand() % 105)),shockCount(0),cprCount(0){
     
 }
 
@@ -46,6 +46,7 @@ void Patient::receiveShock() {
 
 
 bool Patient::receiveCPR() {
+    setCPRCount(getCPRCount() + 1);
     if (updateHeartRhythm()) {
         std::cout << "Patient received CPR. and is ok now\n";
         std::cout << "Heart Beat is now: " << getHeartBeat() << "\n";
@@ -70,6 +71,14 @@ int Patient::getShockCount() const {
 
 void Patient::setShockCount(int count) {
     shockCount = count;
+}
+
+int Patient::getCPRCount() const {
+    return cprCount;
+}
+
+void Patient::setCPRCount(int count) {
+    cprCount = count;
 }
 
 

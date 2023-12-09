@@ -28,6 +28,9 @@ public:
 
     int getShockCount() const;
     void setShockCount(int count);
+    
+    int getCPRCount() const;
+    void setCPRCount(int count);
 
     int getHeartBeat() const;
     
@@ -36,6 +39,7 @@ private:
     int heartBeat;
     int shockStrength;
     int shockCount;
+    int cprCount;
 };
 
 #endif // PATIENT_H

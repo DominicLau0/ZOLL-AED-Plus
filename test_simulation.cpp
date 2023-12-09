@@ -22,6 +22,7 @@ int main() {
     
     std::cout << "Patient stats \n";
     std::cout << "Shock count: " << testPatient.getShockCount() << "\n";
+    std::cout << "CPR count: " << testPatient.getCPRCount() << "\n";
     std::cout << "Heartbeat: " << testPatient.getHeartBeat() << "\n\n";
 
     testAEDSimulator.power(true);
@@ -31,8 +32,11 @@ int main() {
     //assert(/* Add a condition based on your User.cpp logic */, "performCPR test");
     //std::cout << "done with cpr test\n\n";
     //assert(/* Add a condition based on your User.cpp logic */, "applyPads test");
-
-    std::cout << testPatient.getShockCount()<<"\n";
+    
+    std::cout << "\n end Patient stats \n";
+    std::cout << "Shock count: " << testPatient.getShockCount() << "\n";
+    std::cout << "CPR count: " << testPatient.getCPRCount() << "\n";
+    std::cout << "Heartbeat: " << testPatient.getHeartBeat() << "\n\n";
     // Test AEDSimulator's function
     
     //assert(/* Add a condition based on your AEDSimulator.cpp logic */, "analyzeHeartRhythm test");

@@ -20,25 +20,16 @@ public:
     AEDSimulator(); // Constructor
     ~AEDSimulator(); // Destructor
 
-    /*function to turn on the AED when instructed by the user*/
+
     bool power(bool power_switch);
-// assign values to the variable for ShockStrength and shockCount based on the value from analyzeHearthRhythm and call the deliverShockFunction after
     void prepareForShock(Patient& patient,User& user);
-//perform a series of self tests
     bool performSelfTest();
-// take the data from the patients Heart_Beat and coem up with an analysis
     void analyzeHeartRhythm(Patient& patient, User& user);
-// Give feedback on the CPR quality
-    void evaluateCPRQuality(); 
-    bool checkSafety();
-//advice wether CPR is needed or if the patient is ok or dead
-    void advisePostShockCare(); // Corrected spelling
-//chekc the condiytion of the patient after receiving shock
+    void evaluateCPRQuality(Patient& patient);
     void monitorPostShockCare();
-  //  bool pressShockButton(bool shock_Button);
-    void deliverShock(Patient& patient); // Corrected parameter spelling
+    void deliverShock(Patient& patient);
     void provideFeedback(Patient& patient); // Corrected type
-    void warnForSafety();
+
 
 private:
     float battery_percent; // Corrected spelling
