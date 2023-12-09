@@ -26,6 +26,8 @@ public:
     int getCompressionStrength();
     void setCompressionStrength(int strength);
     void generateCPRInstructions(Patient& patient) ;
+    
+
 private:
     std::string userID;
     int compressionStrength;
