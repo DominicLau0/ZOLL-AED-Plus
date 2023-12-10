@@ -32,6 +32,7 @@ public:
 
     int getBatteryPercent() const;
     void setBatteryPercent(int Percent);
+    void replaceBattery();
 
 
 
