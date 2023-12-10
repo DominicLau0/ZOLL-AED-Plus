@@ -28,13 +28,20 @@ bool AEDSimulator::power() {
 
 bool AEDSimulator::performSelfTest() {
     //Return false if battery is low.
-    if(battery_percent <= 20){
+    if(battery_percent <= 70){
         qInfo("Unit Failed");
-        qInfo("Battery is low, charge battery.\n");
+        qInfo("Battery is low, Change battery.\n");
+        replaceBattery();
         return false;
     }
     qInfo("Unit OK.");
     return true;
+}
+
+void AEDSimulator::replaceBattery(){
+    std::cout << "replacing Battery \n";
+    setBatteryPercent(100);
+    std::cout << "Battery replaced \n";
 }
 
 void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
