@@ -30,14 +30,14 @@ public:
     void deliverShock(Patient& patient);
     void provideFeedback(Patient& patient);
 
-    int getBatteryPercent() const;
+    int getBatteryPercent();
     void setBatteryPercent(int Percent);
     void replaceBattery();
 
 
 
 private:
-    float battery_percent;
+    int battery_percent;
     std::string display_message;
     std::string audio;
     bool power_switch;
