@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>AED_Image.jpg</file>
-        <file>Power_Button.png</file>
-        <file>Shock_Button.png</file>
-        <file>LED_Indicator.png</file>
-    </qresource>
-</RCC>

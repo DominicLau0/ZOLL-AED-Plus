@@ -26,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(elapsed_time()));
     time_seconds = 0;
+
+    //Set the led indicator lights to turn on and off
+    ledIndicatorTimer = new QTimer(this);
+    connect(ledIndicatorTimer, SIGNAL(timeout()), this, SLOT(led_indicator_lights()));
+    led_indicator_count = 0;
 }
 
 MainWindow::~MainWindow()
@@ -60,75 +65,24 @@ void MainWindow::on_power_button_released()
             ui->elapsed_time->setVisible(true);
 
             timer->start(1000);
+            ledIndicatorTimer->start(1000);
 
             ui->display_message->setStyleSheet("font-weight: bold; background-color: transparent;");
             ui->display_message->setText("Stay calm");
-
-            QTimer::singleShot(500, [=]() {
-                ui->display_message->setText("CHECK RESPONSIVENESS");
-                ui->led_indicator_1->setEnabled(true);
-            });
-
-            QTimer::singleShot(1000, [=]() {
-                ui->led_indicator_1->setEnabled(false);
-            });
-
-            QTimer::singleShot(1500, [=]() {
-                ui->led_indicator_1->setEnabled(true);
-            });
-
-            QTimer::singleShot(2000, [=]() {
-                ui->display_message->setText("CALL FOR HELP");
-                ui->led_indicator_1->setEnabled(false);
-                ui->led_indicator_2->setEnabled(true);
-            });
-
-            QTimer::singleShot(2500, [=]() {
-                ui->led_indicator_2->setEnabled(false);
-            });
-
-            QTimer::singleShot(3000, [=]() {
-                ui->led_indicator_2->setEnabled(true);
-            });
-
-            QTimer::singleShot(3500, [=]() {
-                ui->led_indicator_2->setEnabled(false);
-            });
-
-            QTimer::singleShot(4000, [=]() {
-                ui->led_indicator_2->setEnabled(true);
-            });
-
-
-            QTimer::singleShot(4500, [=]() {
-                ui->display_message->setText("ATTACH ELECTRODE PADS");
-                ui->led_indicator_2->setEnabled(false);
-                ui->led_indicator_3->setEnabled(true);
-            });
-
-            QTimer::singleShot(5000, [=]() {
-                ui->led_indicator_3->setEnabled(false);
-            });
-
-            QTimer::singleShot(5500, [=]() {
-                ui->led_indicator_3->setEnabled(true);
-            });
-
-            QTimer::singleShot(6000, [=]() {
-                ui->led_indicator_3->setEnabled(false);
-            });
-
-            QTimer::singleShot(6500, [=]() {
-                ui->led_indicator_3->setEnabled(true);
-            });
         }else{
 
         }
     }else{
         //Stop all timer
         timer->stop();
+        ledIndicatorTimer->stop();
         time_seconds = 0;
         ui->elapsed_time->setText("00:00");
+
+        //Reset shock and led indicator count
+        aed.setShockCount(0);
+        ui->shock_count->setText("00");
+        led_indicator_count = 0;
 
         //Turn off display
         ui->shock_label->setVisible(false);
@@ -151,6 +105,18 @@ void MainWindow::on_power_button_released()
 void MainWindow::on_shock_button_released()
 {
     qInfo("Shock Button Pushed");
+
+    aed.increaseShockCount();
+
+    QString shockCountString;
+
+    if(aed.getShockCount() <= 9){
+        shockCountString = "0" + QString::number(aed.getShockCount());
+    }else{
+        shockCountString = QString::number(aed.getShockCount());
+    }
+
+    ui->shock_count->setText(shockCountString);
 }
 
 void MainWindow::elapsed_time()
@@ -176,5 +142,34 @@ void MainWindow::elapsed_time()
 
     QString current_time = minutes_string + ":" + seconds_string;
     ui->elapsed_time->setText(current_time);
+}
+
+
+void MainWindow::on_compression_strength_sliderReleased()
+{
+    qInfo() << QString::number(ui->compression_strength->value());
+}
+
+void MainWindow::led_indicator_lights()
+{
+    if(led_indicator_count < 4){
+        ui->display_message->setText("CHECK RESPONSIVENESS");
+        ui->led_indicator_1->setEnabled(!ui->led_indicator_1->isEnabled());
+
+    }else if(led_indicator_count < 12){
+        ui->display_message->setText("CALL FOR HELP");
+        ui->led_indicator_2->setEnabled(!ui->led_indicator_2->isEnabled());
+
+    }else if(led_indicator_count < 20){
+        ui->display_message->setText("ATTACH ELECTRODE PADS");
+        ui->led_indicator_3->setEnabled(!ui->led_indicator_3->isEnabled());
+    }
+
+    led_indicator_count++;
+}
+
+void MainWindow::on_defib_pads_button_released()
+{
+
 }
 

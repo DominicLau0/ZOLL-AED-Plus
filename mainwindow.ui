@@ -349,7 +349,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>120</y>
+      <y>190</y>
       <width>161</width>
       <height>17</height>
      </rect>
@@ -362,7 +362,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>140</y>
+      <y>210</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -375,7 +375,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>180</y>
+      <y>250</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -388,7 +388,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>220</y>
+      <y>290</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -401,7 +401,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>310</y>
+      <y>380</y>
       <width>161</width>
       <height>17</height>
      </rect>
@@ -414,7 +414,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>260</y>
+      <y>330</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -427,7 +427,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>340</y>
+      <y>410</y>
       <width>160</width>
       <height>16</height>
      </rect>
@@ -440,7 +440,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>370</y>
+      <y>440</y>
       <width>161</width>
       <height>25</height>
      </rect>
@@ -453,7 +453,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>410</y>
+      <y>480</y>
       <width>201</width>
       <height>25</height>
      </rect>
@@ -489,6 +489,54 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>00:00</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="led_indicator_6">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>340</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="AED_Images.qrc">:/Images/LED_Indicator.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="defib_pads_label">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>120</y>
+      <width>211</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Attach Electrode Pads to Patient</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="defib_pads_button">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>140</y>
+      <width>171</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Apply Defib Pads</string>
     </property>
    </widget>
   </widget>

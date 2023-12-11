@@ -7,7 +7,7 @@
 
 #include "User.h"
 
-User::User() : compressionStrength(1 + (rand() % 5)) {}
+User::User() : compressionStrength(0) {}
 
 void User::generateCPRInstructions(Patient& patient)  {
     int compressionStrengthChange = 0;
@@ -53,5 +53,5 @@ int User::getCompressionStrength(){
 }
 
 void User::setCompressionStrength(int strength){
-  compressionStrength+= strength;
+  compressionStrength = strength;
 }

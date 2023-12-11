@@ -34,13 +34,16 @@ public:
     void setBatteryPercent(int Percent);
     void replaceBattery();
 
-
+    int getShockCount();
+    void setShockCount(int);
+    void increaseShockCount();
 
 private:
     int battery_percent;
     std::string display_message;
     std::string audio;
     bool power_switch;
+    int shockCount;
 };
 
 

@@ -38,7 +38,6 @@ public:
 private:
     int heartBeat;
     int shockStrength;
-    int shockCount;
     int cprCount;
 };
 

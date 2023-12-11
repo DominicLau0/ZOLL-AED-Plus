@@ -8,7 +8,7 @@
 #include <iostream>
 #include <QtDebug>
 
-AEDSimulator::AEDSimulator() : battery_percent(100), power_switch(false) {
+AEDSimulator::AEDSimulator() : battery_percent(100), power_switch(false), shockCount(0) {
 }
 
 AEDSimulator::~AEDSimulator() {}
@@ -54,13 +54,13 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
             prepareForShock(patient, user);
         }
         else
-            if(patient.getShockCount()>=1 &&patient.getCPRCount()>=1) {
+            if(getShockCount()>=1 &&patient.getCPRCount()>=1) {
                 provideFeedback(patient);
                 evaluateCPRQuality(patient);
                 break;
                 return;
             }
-            else if(patient.getShockCount()>=1 &&patient.getCPRCount()<=0){
+            else if(getShockCount()>=1 &&patient.getCPRCount()<=0){
                 provideFeedback(patient);
                 monitorPostShockCare();
                 break;
@@ -78,17 +78,17 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
 
 void AEDSimulator::prepareForShock(Patient& patient,User& user) {
         //should depend on shockCount to adjust shockStrength
-    if (patient.getShockCount() == 0) {
+    if (getShockCount() == 0) {
         patient.setShockStrength(200);
-        patient.setShockCount(1);
+        increaseShockCount();
         deliverShock(patient);
 
         // Update patient's heart rhythm here to show stabilization
-    } else if (patient.getShockCount() > 0 && patient.getShockCount() <= 3) {
+    } else if (getShockCount() > 0 && getShockCount() <= 3) {
         patient.setShockStrength(360); // Joules, anywhere between 150 and 360 Joules for every shock after the first
-        patient.setShockCount(patient.getShockCount() + 1);
+        increaseShockCount();
         deliverShock(patient);
-    } else if (patient.getShockCount() > 3) {
+    } else if (getShockCount() > 3) {
         // After 3 shocks, call CPR and update heart rhythm
         std::cout << "Patient is Dying perform CPR " ;
         user.performCPR(patient);
@@ -138,4 +138,16 @@ void AEDSimulator::provideFeedback(Patient& patient) {
     if (patient.getHeartBeat()== 0 ){
          std::cout << "Patient is Dead ";
     }
+}
+
+int AEDSimulator::getShockCount(){
+    return shockCount;
+}
+
+void AEDSimulator::increaseShockCount(){
+    shockCount++;
+}
+
+void AEDSimulator::setShockCount(int count){
+    shockCount = count;
 }
