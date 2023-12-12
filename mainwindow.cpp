@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     expected_shock_counter = 0;
     stage = 0;
     cpr_counter = 0;
+    compression_strength_counter = 0;
 
     //Set up shockable and non-shockable rhythm function
 }
@@ -99,6 +100,7 @@ void MainWindow::on_power_button_released()
         expected_shock_counter = 0;
         stage = 0;
         cpr_counter = 0;
+        compression_strength_counter = 0;
 
         //Turn off display
         ui->shock_label->setVisible(false);
@@ -121,8 +123,6 @@ void MainWindow::on_power_button_released()
 
 void MainWindow::on_shock_button_released()
 {
-    qInfo("Shock Button Pushed");
-
     if(expected_shock_counter == aed.getShockCount() + 1 && stage == 5){
         aed.increaseShockCount();
     }
@@ -163,28 +163,26 @@ void MainWindow::elapsed_time()
     ui->elapsed_time->setText(current_time);
 }
 
-
-void MainWindow::on_compression_strength_sliderReleased()
-{
-    qInfo() << QString::number(ui->compression_strength->value());
-}
-
 void MainWindow::led_indicator_lights()
 {
+    //First Stage
     if(led_indicator_counter < 4){
         ui->display_message->setText("CHECK RESPONSIVENESS");
         ui->led_indicator_1->setEnabled(!ui->led_indicator_1->isEnabled());
 
+    //Second Stage
     }else if(led_indicator_counter < 12){
         ui->display_message->setText("CALL FOR HELP");
         ui->led_indicator_2->setEnabled(!ui->led_indicator_2->isEnabled());
 
+    //Third Stage
     }else if(user.getPadsApplied() == false || pads_applied_led_indicator_counter < 2){
         ui->display_message->setText("ATTACH ELECTRODE PADS");
         ui->led_indicator_3->setEnabled(!ui->led_indicator_3->isEnabled());
 
         pads_applied_led_indicator_counter++;
 
+    //Fourth Stage
     }else if(analyzing_led_indicator_counter < 10 || patient.getHeartCondition() == ""){
         ui->led_indicator_3->setEnabled(false);
         ui->display_message->setText("DON'T TOUCH PATIENT ANALYZING");
@@ -192,6 +190,7 @@ void MainWindow::led_indicator_lights()
 
         analyzing_led_indicator_counter++;
 
+    //Fifth Stage
     }else if((patient.getHeartCondition() == "ventricular_fibrillation" || patient.getHeartCondition() == "ventricular_tachycardia") && expected_shock_counter != aed.getShockCount()){
         ui->led_indicator_4->setEnabled(false);
 
@@ -206,19 +205,27 @@ void MainWindow::led_indicator_lights()
 
         shock_advised_counter++;
 
+    //Sixth Stage
     }else{
         if(cpr_counter < 4){
+            ui->led_indicator_6->setEnabled(false);
+
             if(patient.getHeartCondition() == "sinus_rhythm_or_PEA" || patient.getHeartCondition() == "asystole"){
                 ui->display_message->setText("NO SHOCK ADVISED");
             }else{
                 ui->display_message->setText("SHOCK DELIVERED");
-                ui->led_indicator_6->setEnabled(false);
             }
-            cpr_counter++;
-        }else{
+        }else if(cpr_counter < 10 || user.getCompressionStrength() == -1){
             ui->display_message->setText("START CPR");
             ui->led_indicator_5->setEnabled(!ui->led_indicator_5->isEnabled());
+            stage = 6;
+        }else if(compression_strength_counter < 4){
+            ui->display_message->setText(aed.evaluateCPRQuality(user.getCompressionStrength()));
+            compression_strength_counter++;
+        }else{
+            ui->display_message->setText("STOP CPR");
         }
+        cpr_counter++;
     }
 
     led_indicator_counter++;
@@ -251,3 +258,11 @@ void MainWindow::on_asystole_button_released()
 {
     patient.setHeartCondition("asystole");
 }
+
+void MainWindow::on_apply_compression_button_released()
+{
+    if(stage == 6){
+        user.setCompressionStrength(ui->compression_strength->value());
+    }
+}
+

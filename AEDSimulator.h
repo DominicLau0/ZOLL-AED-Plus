@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Patient.h"
 #include "User.h"
+#include <QString>
 
 
 class AEDSimulator {
@@ -18,7 +19,7 @@ public:
     void prepareForShock(Patient& patient,User& user);
     bool performSelfTest();
     void analyzeHeartRhythm(Patient& patient, User& user);
-    void evaluateCPRQuality(Patient& patient);
+    QString evaluateCPRQuality(int);
     void monitorPostShockCare();
     void deliverShock(Patient& patient);
     void provideFeedback(Patient& patient);

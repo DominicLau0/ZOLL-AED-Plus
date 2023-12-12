@@ -50,7 +50,6 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
         else
             if(getShockCount()>=1 &&patient.getCPRCount()>=1) {
                 provideFeedback(patient);
-                evaluateCPRQuality(patient);
                 break;
                 return;
             }
@@ -99,13 +98,14 @@ void AEDSimulator::deliverShock(Patient& patient) {
 
 }
 
-void AEDSimulator::evaluateCPRQuality(Patient& patient) {
-    // Simulate CPR quality evaluation
-    std::cout << "Evaluating CPR quality... \n";
-    if (patient.getHeartBeat()>= 60 && patient.getHeartBeat() <=100){
-         std::cout << "Patient is ok CPR worked they should make a full recovery\n";
+QString AEDSimulator::evaluateCPRQuality(int compression_strength){
+    if(compression_strength == 0){
+        return "CONTINUE CPR";
+    }else if(compression_strength < 85){
+        return "PUSH HARDER";
+    }else{
+        return "GOOD COMPRESSIONS";
     }
-    std::cout << "Evaluation complete.\n";
 }
 
 void User::generateCPRInstructions(Patient& patient)  {

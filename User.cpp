@@ -1,6 +1,6 @@
 #include "User.h"
 
-User::User() : compressionStrength(0), padsApplied(false) {}
+User::User() : compressionStrength(-1), padsApplied(false) {}
 
 void User::performCPR(Patient& patient){
     std::cout << "User apply a force level of " << getCompressionStrength()<< "\n " ;

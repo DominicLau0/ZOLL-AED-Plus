@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>729</height>
+    <height>773</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -375,6 +375,9 @@ p, li { white-space: pre-wrap; }
     </property>
    </widget>
    <widget class="QPushButton" name="VT_button">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>770</x>
@@ -450,19 +453,6 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>Apply Compression</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="no_apply_compression_button">
-    <property name="geometry">
-     <rect>
-      <x>770</x>
-      <y>480</y>
-      <width>201</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Do Not Apply Compression</string>
     </property>
    </widget>
    <widget class="QLabel" name="shock_count">

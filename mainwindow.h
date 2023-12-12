@@ -26,7 +26,6 @@ protected:
 private slots:
     void on_power_button_released();
     void on_shock_button_released();
-    void on_compression_strength_sliderReleased();
     void on_defib_pads_button_released();
     void on_VF_button_released();
     void on_VT_button_released();
@@ -34,6 +33,8 @@ private slots:
     void on_asystole_button_released();
     void elapsed_time();
     void led_indicator_lights();
+
+    void on_apply_compression_button_released();
 
 private:
     Ui::MainWindow *ui;
@@ -52,6 +53,7 @@ private:
     int expected_shock_counter;
     int stage;
     int cpr_counter;
+    int compression_strength_counter;
 
     QTimer *shock_or_CPR;
 };
