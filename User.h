@@ -1,10 +1,3 @@
-//
-//  User.h
-//
-//
-//  Created by Dami on 02/12/2023.
-//
-
 #ifndef USER_H
 #define USER_H
 
@@ -22,15 +15,17 @@ public:
 //live feedback would be gotten fronm heartbeat feedback from new analyzeheartbeat
     User();
     void performCPR(Patient& patient);
-    void applyPads();
     int getCompressionStrength();
     void setCompressionStrength(int strength);
-    void generateCPRInstructions(Patient& patient) ;
-    
+    void generateCPRInstructions(Patient& patient);
+
+    bool getPadsApplied();
+    void setPadsApplied(bool);
 
 private:
     std::string userID;
     int compressionStrength;
+    bool padsApplied;
 };
 
 #endif // USER_H

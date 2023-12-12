@@ -1,10 +1,3 @@
-//
-// AEDSimulator.h
-//
-//
-//  Created by Dami on 02/12/2023.
-//
-
 #ifndef AEDSIMULATOR_H
 #define AEDSIMULATOR_H
 

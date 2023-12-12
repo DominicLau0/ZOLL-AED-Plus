@@ -1,9 +1,3 @@
-//
-//  AEDSimulator.cpp
-//  
-//
-//  Created by Dami on 02/12/2023.
-//
 #include "AEDSimulator.h"
 #include <iostream>
 #include <QtDebug>
@@ -50,7 +44,7 @@ void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
     // ... (actual analysis logic)
     for(int i =0;i<=5;i++){
         if (patient.getHeartBeat()<= 59 || patient.getHeartBeat() >=101) {
-            user.applyPads();
+            user.setPadsApplied(true);
             prepareForShock(patient, user);
         }
         else
@@ -112,6 +106,27 @@ void AEDSimulator::evaluateCPRQuality(Patient& patient) {
          std::cout << "Patient is ok CPR worked they should make a full recovery\n";
     }
     std::cout << "Evaluation complete.\n";
+}
+
+void User::generateCPRInstructions(Patient& patient)  {
+    int compressionStrengthChange = 0;
+
+    if (patient.getHeartBeat() < 60) {
+        std::cout <<"Please apply more pressure to the chest area!\n";
+        compressionStrengthChange = 1 + (rand() % 5);
+    } else if (patient.getHeartBeat() > 100) {
+        std::cout << "Apply less pressure and slow down compressions!\n";
+        compressionStrengthChange = -1 - (rand() % 5);
+    } else {
+        std::cout << "Patient is fine now\n";
+        compressionStrengthChange = -getCompressionStrength(); // Reset to 0
+    }
+
+    // Update compressionStrength
+    setCompressionStrength(compressionStrengthChange);
+
+    // Print the force level directly from compressionStrength
+    std::cout << "Now applying a force level of " << getCompressionStrength() << "\n";
 }
 
 

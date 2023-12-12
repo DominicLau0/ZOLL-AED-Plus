@@ -1,13 +1,6 @@
-//
-//  Patient1.cpp
-//
-//
-//  Created by Dami on 02/12/2023.
-//
-
 #include "Patient.h"
 
-Patient::Patient():heartBeat( 1 + (rand() % 120)),cprCount(0){
+Patient::Patient():heartBeat( 1 + (rand() % 120)), cprCount(0), heartCondition(""){
 
 }
 
@@ -73,7 +66,13 @@ void Patient::setCPRCount(int count) {
     cprCount = count;
 }
 
-
 int Patient::getHeartBeat() const {
     return heartBeat;
+}
+
+QString Patient::getHeartCondition(){
+    return heartCondition;
+}
+void Patient::setHeartCondition(QString h){
+    heartCondition = h;
 }

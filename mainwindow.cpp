@@ -30,7 +30,10 @@ MainWindow::MainWindow(QWidget *parent)
     //Set the led indicator lights to turn on and off
     ledIndicatorTimer = new QTimer(this);
     connect(ledIndicatorTimer, SIGNAL(timeout()), this, SLOT(led_indicator_lights()));
-    led_indicator_count = 0;
+    led_indicator_counter = 0;
+    analyzing_led_indicator_counter = 0;
+
+    //Set up shockable and non-shockable rhythm function
 }
 
 MainWindow::~MainWindow()
@@ -65,7 +68,7 @@ void MainWindow::on_power_button_released()
             ui->elapsed_time->setVisible(true);
 
             timer->start(1000);
-            ledIndicatorTimer->start(1000);
+            ledIndicatorTimer->start(500);
 
             ui->display_message->setStyleSheet("font-weight: bold; background-color: transparent;");
             ui->display_message->setText("Stay calm");
@@ -82,7 +85,8 @@ void MainWindow::on_power_button_released()
         //Reset shock and led indicator count
         aed.setShockCount(0);
         ui->shock_count->setText("00");
-        led_indicator_count = 0;
+        led_indicator_counter = 0;
+        user.setPadsApplied(false);
 
         //Turn off display
         ui->shock_label->setVisible(false);
@@ -152,24 +156,54 @@ void MainWindow::on_compression_strength_sliderReleased()
 
 void MainWindow::led_indicator_lights()
 {
-    if(led_indicator_count < 4){
+    if(led_indicator_counter < 4){
         ui->display_message->setText("CHECK RESPONSIVENESS");
         ui->led_indicator_1->setEnabled(!ui->led_indicator_1->isEnabled());
 
-    }else if(led_indicator_count < 12){
+    }else if(led_indicator_counter < 12){
         ui->display_message->setText("CALL FOR HELP");
         ui->led_indicator_2->setEnabled(!ui->led_indicator_2->isEnabled());
 
-    }else if(led_indicator_count < 20){
+    }else if(user.getPadsApplied() == false){
         ui->display_message->setText("ATTACH ELECTRODE PADS");
         ui->led_indicator_3->setEnabled(!ui->led_indicator_3->isEnabled());
-    }
 
-    led_indicator_count++;
+    }else if(user.getPadsApplied() == true && analyzing_led_indicator_counter < 10){
+        ui->led_indicator_3->setEnabled(false);
+        ui->display_message->setText("DON'T TOUCH PATIENT ANALYZING");
+        ui->led_indicator_4->setEnabled(!ui->led_indicator_4->isEnabled());
+        analyzing_led_indicator_counter++;
+
+    }else if(patient.getHeartCondition() == "ventricular_fibrillation" || patient.getHeartCondition() == "ventricular_tachycardia"){
+        ui->led_indicator_4->setEnabled(false);
+        ui->display_message->setText("SHOCK ADVISED");
+        ui->led_indicator_6->setEnabled(true);
+    }
+    led_indicator_counter++;
 }
 
 void MainWindow::on_defib_pads_button_released()
 {
-
+    user.setPadsApplied(true);
 }
 
+
+void MainWindow::on_VF_button_released()
+{
+    patient.setHeartCondition("ventricular_fibrillation");
+}
+
+void MainWindow::on_VT_button_released()
+{
+    patient.setHeartCondition("ventricular_tachycardia");
+}
+
+void MainWindow::on_PEA_button_released()
+{
+    patient.setHeartCondition("sinus_rhythm_or_PEA");
+}
+
+void MainWindow::on_asystole_button_released()
+{
+    patient.setHeartCondition("asystole");
+}

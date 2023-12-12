@@ -1,10 +1,3 @@
-//
-//  PATIENT_H
-//
-//
-//  Created by Dami on 02/12/2023.
-//
-
 #ifndef PATIENT_H
 #define PATIENT_H
 class Patient;
@@ -14,6 +7,7 @@ class Patient;
 #include <random>
 
 #include "User.h"
+#include <QString>
 
 class Patient {
 public:
@@ -34,11 +28,14 @@ public:
 
     int getHeartBeat() const;
 
+    QString getHeartCondition();
+    void setHeartCondition(QString);
 
 private:
     int heartBeat;
     int shockStrength;
     int cprCount;
+    QString heartCondition;
 };
 
 #endif // PATIENT_H
