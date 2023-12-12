@@ -32,6 +32,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ledIndicatorTimer, SIGNAL(timeout()), this, SLOT(led_indicator_lights()));
     led_indicator_counter = 0;
     analyzing_led_indicator_counter = 0;
+    pads_applied_led_indicator_counter = 0;
+    shock_advised_counter = 0;
+    expected_shock_counter = 0;
+    stage = 0;
+    cpr_counter = 0;
 
     //Set up shockable and non-shockable rhythm function
 }
@@ -87,6 +92,13 @@ void MainWindow::on_power_button_released()
         ui->shock_count->setText("00");
         led_indicator_counter = 0;
         user.setPadsApplied(false);
+        patient.setHeartCondition("");
+        analyzing_led_indicator_counter = 0;
+        pads_applied_led_indicator_counter = 0;
+        shock_advised_counter = 0;
+        expected_shock_counter = 0;
+        stage = 0;
+        cpr_counter = 0;
 
         //Turn off display
         ui->shock_label->setVisible(false);
@@ -102,6 +114,7 @@ void MainWindow::on_power_button_released()
         ui->led_indicator_3->setEnabled(false);
         ui->led_indicator_4->setEnabled(false);
         ui->led_indicator_5->setEnabled(false);
+        ui->led_indicator_6->setEnabled(false);
     }
 }
 
@@ -110,7 +123,9 @@ void MainWindow::on_shock_button_released()
 {
     qInfo("Shock Button Pushed");
 
-    aed.increaseShockCount();
+    if(expected_shock_counter == aed.getShockCount() + 1 && stage == 5){
+        aed.increaseShockCount();
+    }
 
     QString shockCountString;
 
@@ -164,21 +179,48 @@ void MainWindow::led_indicator_lights()
         ui->display_message->setText("CALL FOR HELP");
         ui->led_indicator_2->setEnabled(!ui->led_indicator_2->isEnabled());
 
-    }else if(user.getPadsApplied() == false){
+    }else if(user.getPadsApplied() == false || pads_applied_led_indicator_counter < 2){
         ui->display_message->setText("ATTACH ELECTRODE PADS");
         ui->led_indicator_3->setEnabled(!ui->led_indicator_3->isEnabled());
 
-    }else if(user.getPadsApplied() == true && analyzing_led_indicator_counter < 10){
+        pads_applied_led_indicator_counter++;
+
+    }else if(analyzing_led_indicator_counter < 10 || patient.getHeartCondition() == ""){
         ui->led_indicator_3->setEnabled(false);
         ui->display_message->setText("DON'T TOUCH PATIENT ANALYZING");
         ui->led_indicator_4->setEnabled(!ui->led_indicator_4->isEnabled());
+
         analyzing_led_indicator_counter++;
 
-    }else if(patient.getHeartCondition() == "ventricular_fibrillation" || patient.getHeartCondition() == "ventricular_tachycardia"){
+    }else if((patient.getHeartCondition() == "ventricular_fibrillation" || patient.getHeartCondition() == "ventricular_tachycardia") && expected_shock_counter != aed.getShockCount()){
         ui->led_indicator_4->setEnabled(false);
-        ui->display_message->setText("SHOCK ADVISED");
-        ui->led_indicator_6->setEnabled(true);
+
+        if(shock_advised_counter < 4){
+            ui->display_message->setText("SHOCK ADVISED");
+            ui->led_indicator_6->setEnabled(true);
+        }else{
+            ui->display_message->setText("PRESS FLASHING SHOCK BUTTON");
+            ui->led_indicator_6->setEnabled(!ui->led_indicator_6->isEnabled());
+            stage = 5;
+        }
+
+        shock_advised_counter++;
+
+    }else{
+        if(cpr_counter < 4){
+            if(patient.getHeartCondition() == "sinus_rhythm_or_PEA" || patient.getHeartCondition() == "asystole"){
+                ui->display_message->setText("NO SHOCK ADVISED");
+            }else{
+                ui->display_message->setText("SHOCK DELIVERED");
+                ui->led_indicator_6->setEnabled(false);
+            }
+            cpr_counter++;
+        }else{
+            ui->display_message->setText("START CPR");
+            ui->led_indicator_5->setEnabled(!ui->led_indicator_5->isEnabled());
+        }
     }
+
     led_indicator_counter++;
 }
 
@@ -191,11 +233,13 @@ void MainWindow::on_defib_pads_button_released()
 void MainWindow::on_VF_button_released()
 {
     patient.setHeartCondition("ventricular_fibrillation");
+    expected_shock_counter = aed.getShockCount() + 1;
 }
 
 void MainWindow::on_VT_button_released()
 {
     patient.setHeartCondition("ventricular_tachycardia");
+    expected_shock_counter = aed.getShockCount() + 1;
 }
 
 void MainWindow::on_PEA_button_released()

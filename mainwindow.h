@@ -47,6 +47,11 @@ private:
     QTimer *ledIndicatorTimer;
     int led_indicator_counter;
     int analyzing_led_indicator_counter;
+    int pads_applied_led_indicator_counter;
+    int shock_advised_counter;
+    int expected_shock_counter;
+    int stage;
+    int cpr_counter;
 
     QTimer *shock_or_CPR;
 };
