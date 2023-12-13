@@ -8,12 +8,9 @@ AEDSimulator::AEDSimulator() : battery_percent(100), power_switch(false), shockC
 AEDSimulator::~AEDSimulator() {}
 
 bool AEDSimulator::power() {
-    //If the device is turned off, turn on.
     if (power_switch == false) {
         power_switch = true;
         return true;
-
-    //If the device is turned on, turn off.
     } else {
         power_switch = false;
         return false;
@@ -21,8 +18,7 @@ bool AEDSimulator::power() {
 }
 
 bool AEDSimulator::performSelfTest() {
-    //Return false if battery is low.
-    if(battery_percent <= 70){
+    if(battery_percent <= 20){
         qInfo("Unit Failed");
         qInfo("Battery is low, Change battery.\n");
         replaceBattery();
@@ -38,63 +34,7 @@ void AEDSimulator::replaceBattery(){
     std::cout << "Battery replaced \n";
 }
 
-void AEDSimulator::analyzeHeartRhythm(Patient& patient,User& user) {
-    // Simulate heart rhythm analysis
-    std::cout << "Analyzing heart rhythm... \n";
-    // ... (actual analysis logic)
-    for(int i =0;i<=5;i++){
-        if (patient.getHeartBeat()<= 59 || patient.getHeartBeat() >=101) {
-            user.setPadsApplied(true);
-            prepareForShock(patient, user);
-        }
-        else
-            if(getShockCount()>=1 &&patient.getCPRCount()>=1) {
-                provideFeedback(patient);
-                break;
-                return;
-            }
-            else if(getShockCount()>=1 &&patient.getCPRCount()<=0){
-                provideFeedback(patient);
-                monitorPostShockCare();
-                break;
-            }
-        // Automatically deliver shock if advised
-    }
-}
-
-    int AEDSimulator::getBatteryPercent() { return battery_percent;}
-    void AEDSimulator::setBatteryPercent(int Percent){
-        battery_percent = Percent;
-    }
-
-
-
-void AEDSimulator::prepareForShock(Patient& patient,User& user) {
-        //should depend on shockCount to adjust shockStrength
-    if (getShockCount() == 0) {
-        patient.setShockStrength(200);
-        increaseShockCount();
-        deliverShock(patient);
-
-        // Update patient's heart rhythm here to show stabilization
-    } else if (getShockCount() > 0 && getShockCount() <= 3) {
-        patient.setShockStrength(360); // Joules, anywhere between 150 and 360 Joules for every shock after the first
-        increaseShockCount();
-        deliverShock(patient);
-    } else if (getShockCount() > 3) {
-        // After 3 shocks, call CPR and update heart rhythm
-        std::cout << "Patient is Dying perform CPR " ;
-        user.performCPR(patient);
-        analyzeHeartRhythm(patient,user);
-    }
-
-}
-
-void AEDSimulator::deliverShock(Patient& patient) {
-    std::cout << "Delivering shock with strength " << patient.getShockStrength() << " Joules...\n";
-    std::cout << "Shock delivered.\n";
-    patient.receiveShock(); // Call receiveShock in the Patient class
-        // ... (additional logic as needed)
+void AEDSimulator::analyzeHeartRhythm() {
 
 }
 
@@ -108,51 +48,12 @@ QString AEDSimulator::evaluateCPRQuality(int compression_strength){
     }
 }
 
-void User::generateCPRInstructions(Patient& patient)  {
-    int compressionStrengthChange = 0;
-
-    if (patient.getHeartBeat() < 60) {
-        std::cout <<"Please apply more pressure to the chest area!\n";
-        compressionStrengthChange = 1 + (rand() % 5);
-    } else if (patient.getHeartBeat() > 100) {
-        std::cout << "Apply less pressure and slow down compressions!\n";
-        compressionStrengthChange = -1 - (rand() % 5);
-    } else {
-        std::cout << "Patient is fine now\n";
-        compressionStrengthChange = -getCompressionStrength(); // Reset to 0
-    }
-
-    // Update compressionStrength
-    setCompressionStrength(compressionStrengthChange);
-
-    // Print the force level directly from compressionStrength
-    std::cout << "Now applying a force level of " << getCompressionStrength() << "\n";
+int AEDSimulator::getBatteryPercent() {
+    return battery_percent;
 }
 
-
-void AEDSimulator::monitorPostShockCare() {
-    // Simulate monitoring post-shock care
-    std::cout << "Post shock care \n";
-    std::cout << "Check if they are responsive\n ";
-    std::cout << "Ask the user how they feel \n";
-    std::cout << "Ensure to speak loudly \n";
-
-
-    // ... (actual monitoring logic)
-    std::cout << "Monitoring complete.\n";
-}
-
-
-void AEDSimulator::provideFeedback(Patient& patient) {
-    if (patient.getHeartBeat()>= 60 && patient.getHeartBeat() <=100){
-         std::cout << "Patient is ok and should make a full recovery\n ";
-    }
-    if (patient.getHeartBeat()<= 50 || patient.getHeartBeat() >= 101){
-         std::cout << "Patient is Still in need of medical attention and should be taken to a hospital\n ";
-    }
-    if (patient.getHeartBeat()== 0 ){
-         std::cout << "Patient is Dead ";
-    }
+void AEDSimulator::setBatteryPercent(int Percent){
+    battery_percent = Percent;
 }
 
 int AEDSimulator::getShockCount(){

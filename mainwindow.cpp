@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     stage = 0;
     cpr_counter = 0;
     compression_strength_counter = 0;
+    stop_cpr_counter = 0;
 
     //Set up shockable and non-shockable rhythm function
 }
@@ -77,7 +78,8 @@ void MainWindow::on_power_button_released()
             ledIndicatorTimer->start(500);
 
             ui->display_message->setStyleSheet("font-weight: bold; background-color: transparent;");
-            ui->display_message->setText("Stay calm");
+            ui->display_message->setText("STAY CALM");
+            ui->display_message->setAlignment(Qt::AlignCenter);
         }else{
 
         }
@@ -101,6 +103,7 @@ void MainWindow::on_power_button_released()
         stage = 0;
         cpr_counter = 0;
         compression_strength_counter = 0;
+        stop_cpr_counter = 0;
 
         //Turn off display
         ui->shock_label->setVisible(false);
@@ -117,6 +120,10 @@ void MainWindow::on_power_button_released()
         ui->led_indicator_4->setEnabled(false);
         ui->led_indicator_5->setEnabled(false);
         ui->led_indicator_6->setEnabled(false);
+
+        //Reset battery percentage
+        aed.setBatteryPercent(100);
+        ui->battery_percentage_bar->setValue(aed.getBatteryPercent());
     }
 }
 
@@ -125,6 +132,16 @@ void MainWindow::on_shock_button_released()
 {
     if(expected_shock_counter == aed.getShockCount() + 1 && stage == 5){
         aed.increaseShockCount();
+        aed.setBatteryPercent(aed.getBatteryPercent() - 10);
+        ui->battery_percentage_bar->setValue(aed.getBatteryPercent());
+
+        if(aed.getBatteryPercent() > 20 && aed.getBatteryPercent() < 80){
+            ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(248, 228, 92);}");
+        }else if(aed.getBatteryPercent() <= 20){
+            ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(246, 97, 81);}");
+        }else{
+            ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(87, 227, 137);}");
+        }
     }
 
     QString shockCountString;
@@ -189,6 +206,10 @@ void MainWindow::led_indicator_lights()
         ui->led_indicator_4->setEnabled(!ui->led_indicator_4->isEnabled());
 
         analyzing_led_indicator_counter++;
+        //Reset some variable info
+        cpr_counter = 0;
+        user.setCompressionStrength(-1);
+        compression_strength_counter = 0;
 
     //Fifth Stage
     }else if((patient.getHeartCondition() == "ventricular_fibrillation" || patient.getHeartCondition() == "ventricular_tachycardia") && expected_shock_counter != aed.getShockCount()){
@@ -207,7 +228,9 @@ void MainWindow::led_indicator_lights()
 
     //Sixth Stage
     }else{
+        shock_advised_counter = 0;
         if(cpr_counter < 4){
+            ui->led_indicator_4->setEnabled(false);
             ui->led_indicator_6->setEnabled(false);
 
             if(patient.getHeartCondition() == "sinus_rhythm_or_PEA" || patient.getHeartCondition() == "asystole"){
@@ -221,13 +244,21 @@ void MainWindow::led_indicator_lights()
             stage = 6;
         }else if(compression_strength_counter < 4){
             ui->display_message->setText(aed.evaluateCPRQuality(user.getCompressionStrength()));
+            ui->led_indicator_5->setEnabled(!ui->led_indicator_5->isEnabled());
             compression_strength_counter++;
-        }else{
+        }else if(stop_cpr_counter < 4){
             ui->display_message->setText("STOP CPR");
+            ui->led_indicator_5->setEnabled(!ui->led_indicator_5->isEnabled());
+            stop_cpr_counter++;
+        }else{
+            ui->led_indicator_5->setEnabled(false);
+            analyzing_led_indicator_counter = 0;
+            stop_cpr_counter = 0;
+            patient.setHeartCondition("");
         }
         cpr_counter++;
     }
-
+    ui->display_message->setAlignment(Qt::AlignCenter);
     led_indicator_counter++;
 }
 
@@ -235,7 +266,6 @@ void MainWindow::on_defib_pads_button_released()
 {
     user.setPadsApplied(true);
 }
-
 
 void MainWindow::on_VF_button_released()
 {

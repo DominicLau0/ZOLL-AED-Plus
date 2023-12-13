@@ -18,7 +18,7 @@ public:
     bool power();
     void prepareForShock(Patient& patient,User& user);
     bool performSelfTest();
-    void analyzeHeartRhythm(Patient& patient, User& user);
+    void analyzeHeartRhythm();
     QString evaluateCPRQuality(int);
     void monitorPostShockCare();
     void deliverShock(Patient& patient);

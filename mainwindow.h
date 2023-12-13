@@ -54,6 +54,7 @@ private:
     int stage;
     int cpr_counter;
     int compression_strength_counter;
+    int stop_cpr_counter;
 
     QTimer *shock_or_CPR;
 };

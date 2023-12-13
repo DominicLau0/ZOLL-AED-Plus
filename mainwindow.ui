@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="AED">
     <property name="geometry">
@@ -282,6 +285,11 @@
       <height>17</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Liberation Sans</family>
+     </font>
+    </property>
     <property name="text">
      <string>SHOCKS:</string>
     </property>
@@ -298,14 +306,25 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Liberation Sans</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: transparent;</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Liberation Sans'; font-size:10pt; font-weight:600; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
@@ -313,7 +332,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>10</y>
+      <y>110</y>
       <width>62</width>
       <height>17</height>
      </rect>
@@ -322,24 +341,11 @@ p, li { white-space: pre-wrap; }
      <string>Self Test</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="self_test_success_button">
-    <property name="geometry">
-     <rect>
-      <x>770</x>
-      <y>30</y>
-      <width>171</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Self Test Succeeded</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="self_test_failed_button">
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>70</y>
+      <y>130</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -352,7 +358,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>190</y>
+      <y>250</y>
       <width>161</width>
       <height>17</height>
      </rect>
@@ -365,7 +371,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>210</y>
+      <y>270</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -381,7 +387,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>250</y>
+      <y>310</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -394,7 +400,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>290</y>
+      <y>350</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -407,7 +413,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>380</y>
+      <y>440</y>
       <width>161</width>
       <height>17</height>
      </rect>
@@ -420,7 +426,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>330</y>
+      <y>390</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -433,7 +439,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>410</y>
+      <y>470</y>
       <width>160</width>
       <height>16</height>
      </rect>
@@ -446,7 +452,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>440</y>
+      <y>500</y>
       <width>161</width>
       <height>25</height>
      </rect>
@@ -458,7 +464,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="shock_count">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>367</x>
       <y>220</y>
       <width>21</width>
       <height>17</height>
@@ -510,7 +516,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>120</y>
+      <y>180</y>
       <width>211</width>
       <height>17</height>
      </rect>
@@ -523,13 +529,61 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>140</y>
+      <y>200</y>
       <width>171</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>Apply Defib Pads</string>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="battery_percentage_bar">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>30</y>
+      <width>171</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar{
+	text-align: center;
+}
+
+QProgressBar::chunk{
+	background-color: rgb(87, 227, 137);
+}</string>
+    </property>
+    <property name="value">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="heart_rhythm_label_2">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>10</y>
+      <width>161</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Battery Percentage</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="replace_battery_button">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>60</y>
+      <width>171</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Replace Battery</string>
     </property>
    </widget>
   </widget>
