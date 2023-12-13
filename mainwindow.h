@@ -21,7 +21,6 @@ public:
     ~MainWindow();
 
 protected:
-    void resizeEvent(QResizeEvent* event) override;
 
 private slots:
     void on_power_button_released();
@@ -35,6 +34,8 @@ private slots:
     void led_indicator_lights();
 
     void on_apply_compression_button_released();
+
+    void on_replace_battery_button_released();
 
 private:
     Ui::MainWindow *ui;

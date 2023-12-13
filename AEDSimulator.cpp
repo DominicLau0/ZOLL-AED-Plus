@@ -19,9 +19,6 @@ bool AEDSimulator::power() {
 
 bool AEDSimulator::performSelfTest() {
     if(battery_percent <= 20){
-        qInfo("Unit Failed");
-        qInfo("Battery is low, Change battery.\n");
-        replaceBattery();
         return false;
     }
     qInfo("Unit OK.");
@@ -29,9 +26,7 @@ bool AEDSimulator::performSelfTest() {
 }
 
 void AEDSimulator::replaceBattery(){
-    std::cout << "replacing Battery \n";
     setBatteryPercent(100);
-    std::cout << "Battery replaced \n";
 }
 
 void AEDSimulator::analyzeHeartRhythm() {
@@ -66,4 +61,8 @@ void AEDSimulator::increaseShockCount(){
 
 void AEDSimulator::setShockCount(int count){
     shockCount = count;
+}
+
+int AEDSimulator::getPowerSwitch(){
+    return power_switch;
 }

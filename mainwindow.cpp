@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->AED->setScaledContents(true);
 
     //Set the display to be off.
-    ui->self_test_succeeded->setVisible(false);
+    ui->self_test_succeeded->setEnabled(false);
     ui->shock_label->setVisible(false);
     ui->shock_count->setVisible(false);
     ui->elapsed_time->setVisible(false);
@@ -48,27 +48,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::resizeEvent(QResizeEvent* event)
-{
-    /*
-    QMainWindow::resizeEvent(event);
-    // Retrieve the new size of the window
-    QSize newSize = event->size();
-
-    // Scale the pixmap to the new window size
-    QPixmap scaledPix = QPixmap(":/AED_Image.jpg").scaled(newSize, Qt::KeepAspectRatio);
-
-    // Set the scaled pixmap to the QLabel
-    ui->AED->setPixmap(scaledPix);
-    */
-}
-
 void MainWindow::on_power_button_released()
 {
     //Power on or off the device.
     if(aed.power() == true){
         if(aed.performSelfTest() == true){
-            ui->self_test_succeeded->setVisible(true);
+            ui->self_test_succeeded->setEnabled(true);
             ui->shock_label->setVisible(true);
             ui->shock_count->setVisible(true);
             ui->display_message->setVisible(true);
@@ -81,7 +66,7 @@ void MainWindow::on_power_button_released()
             ui->display_message->setText("STAY CALM");
             ui->display_message->setAlignment(Qt::AlignCenter);
         }else{
-
+            ui->self_test_succeeded->setVisible(false);
         }
     }else{
         //Stop all timer
@@ -111,7 +96,8 @@ void MainWindow::on_power_button_released()
         ui->display_message->setVisible(false);
         ui->elapsed_time->setVisible(false);
 
-        ui->self_test_succeeded->setVisible(false);
+        ui->self_test_succeeded->setEnabled(false);
+        ui->self_test_succeeded->setVisible(true);
 
         //Turn off led indicator lights
         ui->led_indicator_1->setEnabled(false);
@@ -120,10 +106,6 @@ void MainWindow::on_power_button_released()
         ui->led_indicator_4->setEnabled(false);
         ui->led_indicator_5->setEnabled(false);
         ui->led_indicator_6->setEnabled(false);
-
-        //Reset battery percentage
-        aed.setBatteryPercent(100);
-        ui->battery_percentage_bar->setValue(aed.getBatteryPercent());
     }
 }
 
@@ -131,16 +113,20 @@ void MainWindow::on_power_button_released()
 void MainWindow::on_shock_button_released()
 {
     if(expected_shock_counter == aed.getShockCount() + 1 && stage == 5){
-        aed.increaseShockCount();
-        aed.setBatteryPercent(aed.getBatteryPercent() - 10);
-        ui->battery_percentage_bar->setValue(aed.getBatteryPercent());
+        if(aed.getBatteryPercent() > 10){
+            aed.increaseShockCount();
+            aed.setBatteryPercent(aed.getBatteryPercent() - 10);
+            ui->battery_percentage_bar->setValue(aed.getBatteryPercent());
 
-        if(aed.getBatteryPercent() > 20 && aed.getBatteryPercent() < 80){
-            ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(248, 228, 92);}");
-        }else if(aed.getBatteryPercent() <= 20){
-            ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(246, 97, 81);}");
+            if(aed.getBatteryPercent() > 20 && aed.getBatteryPercent() < 80){
+                ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(248, 228, 92);}");
+            }else if(aed.getBatteryPercent() <= 20){
+                ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(246, 97, 81);}");
+            }else{
+                ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(87, 227, 137);}");
+            }
         }else{
-            ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(87, 227, 137);}");
+            qInfo("Battery too low. Turn off device and press the replace battery button.");
         }
     }
 
@@ -296,3 +282,13 @@ void MainWindow::on_apply_compression_button_released()
     }
 }
 
+void MainWindow::on_replace_battery_button_released()
+{
+    if(aed.getPowerSwitch() == true){
+        qInfo("Switch off the device before replacing the battery.");
+    }else{
+        aed.replaceBattery();
+        ui->battery_percentage_bar->setStyleSheet("QProgressBar{text-align: center;}QProgressBar::chunk{background-color: rgb(87, 227, 137);}");
+        ui->battery_percentage_bar->setValue(aed.getBatteryPercent());
+    }
+}
