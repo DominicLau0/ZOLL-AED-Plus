@@ -2,10 +2,6 @@
 
 User::User() : compressionStrength(0), padsApplied(false) {}
 
-void User::performCPR(Patient& patient){
-
-}
-
 bool User::getPadsApplied(){
     return padsApplied;
 }

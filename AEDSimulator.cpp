@@ -25,12 +25,19 @@ bool AEDSimulator::performSelfTest() {
     return true;
 }
 
-void AEDSimulator::replaceBattery(){
-    setBatteryPercent(100);
-}
+//Decides whether or not the patients heart rhythm returns to normal. Asystole can po
+bool AEDSimulator::analyzeHeartRhythm(QString heart_rhythm) {
+    if(heart_rhythm == "asystole"){
+        return false;
+    }else{
+        srand(time(NULL));
 
-void AEDSimulator::analyzeHeartRhythm() {
-
+        if(rand() % 2 == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 QString AEDSimulator::evaluateCPRQuality(int compression_strength){
@@ -51,16 +58,20 @@ void AEDSimulator::setBatteryPercent(int Percent){
     battery_percent = Percent;
 }
 
+void AEDSimulator::replaceBattery(){
+    setBatteryPercent(100);
+}
+
 int AEDSimulator::getShockCount(){
     return shockCount;
 }
 
-void AEDSimulator::increaseShockCount(){
-    shockCount++;
-}
-
 void AEDSimulator::setShockCount(int count){
     shockCount = count;
+}
+
+void AEDSimulator::increaseShockCount(){
+    shockCount++;
 }
 
 int AEDSimulator::getPowerSwitch(){

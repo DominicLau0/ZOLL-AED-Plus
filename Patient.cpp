@@ -1,22 +1,6 @@
 #include "Patient.h"
 
-Patient::Patient():heartBeat( 1 + (rand() % 120)), cprCount(0), heartCondition(""){
-}
-
-void Patient::receiveShock() {
-
-}
-
-bool Patient::receiveCPR() {
-
-}
-
-int Patient::getShockStrength() const {
-    return shockStrength;
-}
-
-void Patient::setShockStrength(int strength) {
-    shockStrength = strength;
+Patient::Patient():cprCount(0), heartCondition(""){
 }
 
 int Patient::getCPRCount() const {

@@ -39,8 +39,6 @@ MainWindow::MainWindow(QWidget *parent)
     cpr_counter = 0;
     compression_strength_counter = 0;
     stop_cpr_counter = 0;
-
-    //Set up shockable and non-shockable rhythm function
 }
 
 MainWindow::~MainWindow()
@@ -238,9 +236,15 @@ void MainWindow::led_indicator_lights()
             stop_cpr_counter++;
         }else{
             ui->led_indicator_5->setEnabled(false);
-            analyzing_led_indicator_counter = 0;
-            stop_cpr_counter = 0;
-            patient.setHeartCondition("");
+            if(aed.analyzeHeartRhythm(patient.getHeartCondition()) == true){
+                ui->display_message->setText("NO SHOCK ADVISE");
+                qInfo("Patient's heart rhythm returned to normal.");
+                ledIndicatorTimer->stop();
+            }else{
+                analyzing_led_indicator_counter = 0;
+                stop_cpr_counter = 0;
+                patient.setHeartCondition("");
+            }
         }
         cpr_counter++;
     }

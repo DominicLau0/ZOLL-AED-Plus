@@ -4,25 +4,17 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
-#include "Patient.h"
-#include "User.h"
 #include <QString>
-
 
 class AEDSimulator {
 public:
     AEDSimulator();
     ~AEDSimulator();
 
-
     bool power();
-    void prepareForShock(Patient& patient,User& user);
     bool performSelfTest();
-    void analyzeHeartRhythm();
+    bool analyzeHeartRhythm(QString);
     QString evaluateCPRQuality(int);
-    void monitorPostShockCare();
-    void deliverShock(Patient& patient);
-    void provideFeedback(Patient& patient);
 
     int getBatteryPercent();
     void setBatteryPercent(int Percent);
@@ -41,7 +33,5 @@ private:
     bool power_switch;
     int shockCount;
 };
-
-
 
 #endif // AEDSIMULATOR_H
