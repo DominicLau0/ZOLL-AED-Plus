@@ -586,6 +586,32 @@ QProgressBar::chunk{
      <string>Replace Battery</string>
     </property>
    </widget>
+   <widget class="QLabel" name="heart_rhythm_graph_label">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>550</y>
+      <width>161</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Heart Rhythm Graph</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="heart_rhythm_graph">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>570</y>
+      <width>221</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

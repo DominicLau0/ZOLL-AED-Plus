@@ -32,7 +32,7 @@ bool AEDSimulator::analyzeHeartRhythm(QString heart_rhythm) {
     }else{
         srand(time(NULL));
 
-        if(rand() % 2 == 0){
+        if(rand() % 3 == 0){
             return true;
         }else{
             return false;

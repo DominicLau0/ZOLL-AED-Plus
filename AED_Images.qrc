@@ -6,5 +6,9 @@
         <file>Images/self_test_off.png</file>
         <file>Images/self_test_on.png</file>
         <file>Images/Shock_Button.png</file>
+        <file>Images/Asystole.png</file>
+        <file>Images/Sinus_PEA.png</file>
+        <file>Images/Ventricular Fibrillation.png</file>
+        <file>Images/Ventricular Tachycardia.png</file>
     </qresource>
 </RCC>
