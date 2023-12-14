@@ -257,6 +257,7 @@ void MainWindow::led_indicator_lights()
     }else{
         shock_advised_counter = 0;
         ui->led_indicator_3->setEnabled(false);
+        ui->heart_rhythm_graph->setVisible(true);
 
         if(cpr_counter < 4){
             ui->led_indicator_4->setEnabled(false);
