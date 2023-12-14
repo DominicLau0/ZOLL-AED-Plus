@@ -224,6 +224,7 @@ void MainWindow::led_indicator_lights()
 
     //Fifth Stage
     }else if((patient.getHeartCondition() == "ventricular_fibrillation" || patient.getHeartCondition() == "ventricular_tachycardia") && expected_shock_counter != aed.getShockCount()){
+        ui->led_indicator_3->setEnabled(false);
         ui->led_indicator_4->setEnabled(false);
 
         ui->VF_button->setEnabled(false);
@@ -255,6 +256,8 @@ void MainWindow::led_indicator_lights()
     //Sixth Stage
     }else{
         shock_advised_counter = 0;
+        ui->led_indicator_3->setEnabled(false);
+
         if(cpr_counter < 4){
             ui->led_indicator_4->setEnabled(false);
             ui->led_indicator_6->setEnabled(false);
@@ -286,6 +289,8 @@ void MainWindow::led_indicator_lights()
             ui->display_message->setText(aed.evaluateCPRQuality(user.getCompressionStrength()));
             ui->led_indicator_5->setEnabled(!ui->led_indicator_5->isEnabled());
 
+            ui->compression_indicator->setValue(user.getCompressionStrength());
+
             compression_strength_counter++;
 
         }else if(stop_cpr_counter < 4){
@@ -300,10 +305,15 @@ void MainWindow::led_indicator_lights()
 
         }else{
             ui->led_indicator_5->setEnabled(false);
+            ui->compression_indicator->setValue(0);
 
             if(aed.analyzeHeartRhythm(patient.getHeartCondition()) == true){
                 ui->display_message->setText("NO SHOCK ADVISE");
                 qInfo("Patient's heart rhythm returned to normal.");
+
+                QPixmap pix(":/Images/Normal Heart Rhythm.png");
+                ui->heart_rhythm_graph->setPixmap(pix);
+
                 ledIndicatorTimer->stop();
 
             }else{
@@ -384,3 +394,16 @@ void MainWindow::on_replace_battery_button_released()
         ui->battery_percentage_bar->setValue(aed.getBatteryPercent());
     }
 }
+
+void MainWindow::on_detach_pads_released()
+{
+    user.setPadsApplied(false);
+
+    ui->led_indicator_1->setEnabled(false);
+    ui->led_indicator_2->setEnabled(false);
+    ui->led_indicator_3->setEnabled(false);
+    ui->led_indicator_4->setEnabled(false);
+    ui->led_indicator_5->setEnabled(false);
+    ui->led_indicator_6->setEnabled(false);
+}
+

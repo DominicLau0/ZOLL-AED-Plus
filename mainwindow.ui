@@ -302,7 +302,7 @@
      <rect>
       <x>300</x>
       <y>240</y>
-      <width>161</width>
+      <width>151</width>
       <height>61</height>
      </rect>
     </property>
@@ -328,37 +328,24 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="self_test_label">
+   <widget class="QPushButton" name="detach_pads">
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>110</y>
-      <width>62</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Self Test</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="self_test_failed_button">
-    <property name="geometry">
-     <rect>
-      <x>770</x>
-      <y>130</y>
+      <y>160</y>
       <width>171</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Self Test Failed</string>
+     <string>Disconnect Pads</string>
     </property>
    </widget>
    <widget class="QLabel" name="heart_rhythm_label">
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>250</y>
+      <y>210</y>
       <width>161</width>
       <height>17</height>
      </rect>
@@ -371,7 +358,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>270</y>
+      <y>230</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -387,7 +374,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>310</y>
+      <y>270</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -400,20 +387,20 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>350</y>
+      <y>310</y>
       <width>171</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Sinus Rhythm or PEA</string>
+     <string>PEA</string>
     </property>
    </widget>
    <widget class="QLabel" name="CPR_label">
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>440</y>
+      <y>400</y>
       <width>161</width>
       <height>17</height>
      </rect>
@@ -426,7 +413,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>390</y>
+      <y>350</y>
       <width>171</width>
       <height>25</height>
      </rect>
@@ -439,7 +426,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>470</y>
+      <y>430</y>
       <width>160</width>
       <height>16</height>
      </rect>
@@ -452,7 +439,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>500</y>
+      <y>460</y>
       <width>161</width>
       <height>25</height>
      </rect>
@@ -516,26 +503,26 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>180</y>
+      <y>110</y>
       <width>211</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Attach Electrode Pads to Patient</string>
+     <string>Attach and Detach Pads</string>
     </property>
    </widget>
    <widget class="QPushButton" name="defib_pads_button">
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>200</y>
+      <y>130</y>
       <width>171</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Apply Defib Pads</string>
+     <string>Attach Defib Pads</string>
     </property>
    </widget>
    <widget class="QProgressBar" name="battery_percentage_bar">
@@ -590,7 +577,7 @@ QProgressBar::chunk{
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>550</y>
+      <y>510</y>
       <width>161</width>
       <height>17</height>
      </rect>
@@ -603,13 +590,45 @@ QProgressBar::chunk{
     <property name="geometry">
      <rect>
       <x>770</x>
-      <y>570</y>
+      <y>530</y>
       <width>221</width>
       <height>81</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="compression_indicator">
+    <property name="geometry">
+     <rect>
+      <x>444</x>
+      <y>240</y>
+      <width>20</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="toolTipDuration">
+     <number>1</number>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar{
+	text-align: center;
+	background-color: rgb(192, 191, 188);
+}
+
+QProgressBar::chunk{
+	background-color: rgb(205, 171, 143);
+}</string>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
     </property>
    </widget>
   </widget>

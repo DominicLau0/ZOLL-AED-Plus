@@ -37,6 +37,8 @@ private slots:
 
     void on_replace_battery_button_released();
 
+    void on_detach_pads_released();
+
 private:
     Ui::MainWindow *ui;
     AEDSimulator aed;
