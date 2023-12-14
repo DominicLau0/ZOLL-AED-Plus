@@ -17,7 +17,7 @@ Use Case (Daniel, Jonathan, Dami)
 
 Sequence Diagram (Dami, Dominic)
 
-UML Diagram (Daniel)
+UML Diagram (Daniel and Dami)
 
 State Diagram (Jonathan, Daniel)
 
