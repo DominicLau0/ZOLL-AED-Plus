@@ -17,11 +17,11 @@ Use Case (Daniel, Jonathan, Dami)
 
 Sequence Diagram (Dami, Dominic)
 
-UML Diagram (Daniel and Dami)
+UML Diagram (Daniel, Dami, Dominic)
 
 State Diagram (Jonathan, Daniel)
 
-Traceability Matrix (Daniel, Jonathan)
+Traceability Matrix (Daniel, Jonathan, Dominic)
 
 Front End and Back End Code (Dominic)
 
